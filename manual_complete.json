@@ -1,0 +1,972 @@
+{
+  "manual_info": {
+    "source": "impressora.pdf",
+    "total_sections": 114,
+    "processed_at": "2025-06-26 16:36:58"
+  },
+  "sections": [
+    {
+      "id": "solução_problemas_0",
+      "title": "Solução de Problemas",
+      "content": "Transporte doproduto ...................................................................................................................... 159 Soluçãodeproblemas ............................................................................................................................ 163 Busca deatualiza çõespara osoftware ............................................................................................ 163 Estado dasluzes doproduto ............................................................................................................ 164",
+      "type": "solução_problemas",
+      "keywords": [
+        "driver",
+        "problema",
+        "solução"
+      ]
+    },
+    {
+      "id": "solução_problemas_1",
+      "title": "Solução de Problemas",
+      "content": "Como executar uma verifica çãodoproduto ..................................................................................... 166 Redefini çãodasconfigura çõesderede ........................................................................................... 168 Resolu çãodeproblemas deinstala ção............................................................................................ 168 Oproduto nãoligaoudesliga ...................................................................................................... 168",
+      "type": "solução_problemas",
+      "keywords": [
+        "configurar",
+        "wifi",
+        "problema",
+        "rede"
+      ]
+    },
+    {
+      "id": "solução_problemas_2",
+      "title": "Solução de Problemas",
+      "content": "Ouve-se umruídodepois decarregar atinta............................................................................... 169 Problemas deinstala çãodosoftware .......................................................................................... 169 Resolu çãodeproblemas derede..................................................................................................... 170 Oproduto nãoconsegue seconectar aumroteador ouponto deacesso ................................... 170 Osoftware derede nãoconsegue encontrar oproduto narede .................................................. 172",
+      "type": "solução_problemas",
+      "keywords": [
+        "driver",
+        "problema",
+        "rede",
+        "tinta",
+        "conectar",
+        "carregar",
+        "wifi"
+      ]
+    },
+    {
+      "id": "solução_problemas_3",
+      "title": "Solução de Problemas",
+      "content": "Resolu çãodeproblemas decópia................................................................................................... 177 Oproduto emite sons, mas nada écopiado ................................................................................ 177 Oproduto emite ruídosquando ficasem serusado porumcerto tempo ..................................... 177 Ascópias sãocortadas ................................................................................................................ 178",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "cópia"
+      ]
+    },
+    {
+      "id": "solução_problemas_4",
+      "title": "Solução de Problemas",
+      "content": "Ascópias têmcores incorretas oufracas .................................................................................... 178 Aposição,tamanho oumargens dascópias estãoincorretas ..................................................... 178 Resolu çãodeproblemas com opapel ............................................................................................. 179 Problemas dealimenta çãodopapel ........................................................................................... 179",
+      "type": "solução_problemas",
+      "keywords": [
+        "papel",
+        "problema",
+        "cópia"
+      ]
+    },
+    {
+      "id": "solução_problemas_5",
+      "title": "Solução de Problemas",
+      "content": "Problemas deobstru çãodopapel ............................................................................................... 180 8Problemas deejeçãodopapel .................................................................................................... 184 Soluçãodeproblemas deimpress ãoapartir deumcomputador ..................................................... 184 Nada éimpresso ......................................................................................................................... 184",
+      "type": "solução_problemas",
+      "keywords": [
+        "papel",
+        "problema",
+        "solução"
+      ]
+    },
+    {
+      "id": "solução_problemas_6",
+      "title": "Solução de Problemas",
+      "content": "Oícone doproduto nãoaparece nabarra detarefas do Windows .............................................. 186 Aimpress ãoestálenta ................................................................................................................ 187 Resolu çãodeproblemas deleiaute econte údodepágina .............................................................. 188 Imagem aparece invertida ........................................................................................................... 189",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema"
+      ]
+    },
+    {
+      "id": "solução_problemas_7",
+      "title": "Solução de Problemas",
+      "content": "Caracteres incorretos sãoimpressos .......................................................................................... 191 Tamanho ouposiçãoincorreta daimagem .................................................................................. 192 Oimpresso estáinclinado ........................................................................................................... 193 Resolu çãodeproblemas dequalidade deimpress ão...................................................................... 193",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "solução_problemas_8",
+      "title": "Solução de Problemas",
+      "content": "Ascores estãoincorretas ............................................................................................................ 199 Resolu çãodeproblemas dedigitaliza ção........................................................................................ 200 Osoftware dedigitaliza çãonãofunciona corretamente .............................................................. 201 Nãoéposs íveliniciar o Epson Scan 2......................................................................................... 201",
+      "type": "solução_problemas",
+      "keywords": [
+        "driver",
+        "digitalizar",
+        "problema"
+      ]
+    },
+    {
+      "id": "solução_problemas_9",
+      "title": "Solução de Problemas",
+      "content": "Adigitaliza çãoélenta .................................................................................................................. 202 Resolu çãodeproblemas dequalidade daimagem digitalizada ....................................................... 203 Aimagem consiste apenas dealguns pontos .............................................................................. 203 Uma linha pontilhada aparece emtodas asimagens digitalizadas .............................................. 203",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "solução_problemas_10",
+      "title": "Solução de Problemas",
+      "content": "Aslinhas retas emuma imagem aparecem tortas ....................................................................... 204 Problemas dequalidade daimagem digitalizada ........................................................................ 204 Caracteres nãosãoreconhecidos durante aconvers ãopara texto editável(OCR) .................... 206 Ascores daimagem sãodesiguais nasbordas ........................................................................... 206 Ondula çõesaparecem naimagem .............................................................................................. 207",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "solução_problemas_11",
+      "title": "Solução de Problemas",
+      "content": "Observa ção:Certifique-se deapertar esegurar obotão Wi-Fi doproduto dentro de2minutos após apertar obotão WPS noroteador ouponto deacesso. Tema principal: Wi-Fi Protected Setup (WPS) Refer ências relacionadas Estado dasluzes doproduto Impress ãodeuma folha deestado darede Vocêpode imprimir uma folha deestado darede para ajudar adeterminar ascausas deeventuais problemas quepodem ocorrer aousar oproduto emuma rede. Para imprimir afolha deestado, aperte esegure obotão estado darede noproduto porpelo menos sete segundos.",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "rede",
+        "configurar",
+        "wifi",
+        "imprimir",
+        "painel",
+        "papel"
+      ]
+    },
+    {
+      "id": "solução_problemas_12",
+      "title": "Solução de Problemas",
+      "content": "Observa ção:Sevocêsoltar obotãoantes dossete segundos passarem, umrelatóriodeconex ãode rede éimpresso aoinvésdafolha deestado. Examine asconfigura çõesmostradas nafolha deestado darede para diagnosticar quaisquer problemas quepossa ter. Tema principal: Rede Wi-Fi Impress ãodeumrelatóriodeconex ãoderede Vocêpode imprimir umrelatóriodeconex ãoderede queofere çadetalhes daconex ãoentre oproduto e oroteador sem fios. 1.Para imprimir orelatóriodeconex ãoderede, aperte obotão estado darede noproduto. 2.Revise ainforma çãocontida norelatórioeresolva qualquer erroexistente.",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "rede",
+        "configurar",
+        "wifi",
+        "imprimir",
+        "painel",
+        "papel"
+      ]
+    },
+    {
+      "id": "solução_problemas_13",
+      "title": "Solução de Problemas",
+      "content": "Códigos emensagens dorelatóriodeconex ãoderede Tema principal: Rede Wi-Fi 28Códigos emensagens dorelatóriodeconex ãoderede Verifique oscódigos deerroemensagens norelatóriodeconex ãoderede para resolver problemas que pode encontrar com asconex õesderede. Estas tabelas listam soluçõespara problemas baseando-se noscódigos deerroemensagens quepodem aparecer noaltodorelatório. 1 Código deerro 2 Mensagem Observa ção:Oscódigos deerros emensagens listados aqui podem nãoseaplicar aoseuproduto. Códigos deerro emensagens Código deerro emensagem Solução E-1 Confirme queocabo derede está",
+      "type": "solução_problemas",
+      "keywords": [
+        "wifi",
+        "problema",
+        "rede",
+        "solução"
+      ]
+    },
+    {
+      "id": "solução_problemas_14",
+      "title": "Solução de Problemas",
+      "content": "conectado aosdispositivos derede, como umhub, roteador ouponto deacesso, e queestáligado.Certifique-se dequeoseuroteador, ponto deacesso e/ou hubestáligado equeocabo derede estáconectado seguramente aoseudispositivo eproduto. Seestiver tentando configurar Wi-Fi, remova ocabo de rede econfigure o Wi-Fi novamente. Ethernet e Wi-Fi não podem serconectados aomesmo tempo. 29Código deerro emensagem Solução E-2,E-3ou E-7 Nenhum nome derede (SSID) sem fio encontrado. Confirme queoroteador/ponto deacesso estáligado equearede sem fios(SSID) estáconfigurada corretamente.",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "rede",
+        "conectar",
+        "solução",
+        "configurar",
+        "wifi"
+      ]
+    },
+    {
+      "id": "solução_problemas_15",
+      "title": "Solução de Problemas",
+      "content": "adicionado àrede usando ométodo dobotão WPS, ou caso asuarede tenha sido configurada usando um método diferente dodebotão WPS, tente baixar e instalar osoftware doproduto novamente. 30Código deerro emensagem Solução E-5 Modo deseguran ça(ex.WEP, WPA) não corresponde àconfigura çãoatual da impressora. Confirme omodo de seguran ça.Entre emcontato com oseu administrador derede para obter ajuda.Seaseguran çanoseuroteador ouponto deacesso não forumdostipos aseguir, modifique otipodeseguran ça noseuroteador ouponto deacesso ereinicie as configura çõesderede doseuproduto. •WEP-64 bit(40bit)",
+      "type": "solução_problemas",
+      "keywords": [
+        "driver",
+        "problema",
+        "rede",
+        "cartucho",
+        "solução",
+        "configurar",
+        "wifi",
+        "painel"
+      ]
+    },
+    {
+      "id": "solução_problemas_16",
+      "title": "Solução de Problemas",
+      "content": "produto para quenãoseja filtrado. Encontre oendere ço MAC norelatóriodeconex ãoderede eveja a documenta çãodoroteador ouponto deacesso para instru ções. Seoseuroteador ouponto deacesso estiver usando autentica çãocompartilhada com seguran ça WEP, confirme queestáusando achave deautentica çãoe índice corretos. Seoseuroteador ouponto deacesso limitar onúmero de dispositivos conectados, eleve olimite deconex ão. Consulte adocumenta çãodoroteador ouponto de acesso para obter mais instru ções. 31Código deerro emensagem Solução E-8 Oendere ço IPincorreto foidesignado para",
+      "type": "solução_problemas",
+      "keywords": [
+        "wifi",
+        "problema",
+        "rede",
+        "solução"
+      ]
+    },
+    {
+      "id": "solução_problemas_17",
+      "title": "Solução de Problemas",
+      "content": "seuproduto novamente para reiniciar assuas configura çõesderede. 32Código deerro emensagem Solução E-10 Confirme aconfigura çãodeendere ço IP, máscara desubrede egateway padrão. Uma conex ãousando o Epson Net Setup estádispon ível.Entre emcontato com o seuadministrador derede para obter ajuda.Certifique-se dequeoutros dispositivos narede estejam ligados efaçaoseguinte: •Seaconfigura ção Obter endere ço IPdoseuproduto estiver definida como Manual ,cheque oendere ço IP, máscara desubrede egateway padrãonorelatóriode conex ãoderede para verseestãocorretos. Senão estiverem, corrija asconfigura ções.",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "rede",
+        "solução",
+        "configurar",
+        "wifi"
+      ]
+    },
+    {
+      "id": "solução_problemas_18",
+      "title": "Solução de Problemas",
+      "content": "administrador derede para obter ajuda.Sedefinir a Configura ção TCP/IP doseuproduto como Manual ,verifique seoendere çodegateway padrão listado norelatóriodeconex ãoderede estácorreto. Além disso, ligue odispositivo queestiver configurado como o gateway padrão. 33Código deerro emensagem Solução E-12 Confirme oseguinte: -Achave deseguran ça/senha foidigitada corretamente. -Oíndice dachave deseguran ça/senha estádefinido para oprimeiro número -Aconfigura çãodoendere ço IP,máscara desubrede ougateway padrãoestácorreta Entre emcontato com oseuadministrador",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "rede",
+        "solução",
+        "configurar",
+        "wifi"
+      ]
+    },
+    {
+      "id": "solução_problemas_19",
+      "title": "Solução de Problemas",
+      "content": "para reiniciar assuas configura çõesderede. •Seoseuroteador ouponto deacesso usar seguran ça WEP com váriassenhas registradas, certifique-se de queaprimeira senha registrada estáconfigurada no seuproduto. 34Código deerro emensagem Solução E-13 Confirme oseguinte: -Achave deseguran ça/senha foidigitada corretamente. -Oíndice dachave deseguran ça/senha estádefinido para oprimeiro número. -Aconex ãoeconfigura çãoderede do PC oudeoutro dispositivo estácorreta. Entre emcontato com oseuadministrador derede para obter ajuda.Certifique-se dequeoseuroteador, ponto deacesso e/ou",
+      "type": "solução_problemas",
+      "keywords": [
+        "problema",
+        "rede",
+        "solução",
+        "configurar",
+        "wifi"
+      ]
+    },
+    {
+      "id": "papel_0",
+      "title": "Configuração de Papel",
+      "content": "Como colocar papel .................................................................................................................................. 37 Carregamento depapel noalimentador defolhas .............................................................................. 37 Capacidade decarregamento dopapel ............................................................................................. 41 Capacidade deimpress ãodedois lados ............................................................................................ 41",
+      "type": "papel",
+      "keywords": [
+        "duplex",
+        "papel",
+        "carregar"
+      ]
+    },
+    {
+      "id": "papel_1",
+      "title": "Configuração de Papel",
+      "content": "Papéis Epson compat íveis................................................................................................................. 42 Compatibilidade depapel para impress ãosem margens ................................................................... 44 Configura çõesdetipodepapel oumídia........................................................................................... 44 Como colocar originais noproduto ......................................................................................................... 46",
+      "type": "papel",
+      "keywords": [
+        "configurar",
+        "papel",
+        "carregar"
+      ]
+    },
+    {
+      "id": "papel_2",
+      "title": "Configuração de Papel",
+      "content": "Como colocar originais novidro doscanner ....................................................................................... 46 Como fazer cópias..................................................................................................................................... 48 Como alterar otamanho depapel padrãousando opainel decontrole ............................................. 48 Cópiadedocumentos oufotos ........................................................................................................... 48",
+      "type": "papel",
+      "keywords": [
+        "cópia",
+        "carregar",
+        "digitalizar",
+        "painel",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_3",
+      "title": "Configuração de Papel",
+      "content": "Compre tintas Epson ........................................................................................................................ 132 Número derefer ência dasgarrafas detinta................................................................................. 132 Recarregamento dostanques detinta ............................................................................................. 132 Ajuste daqualidade deimpress ão......................................................................................................... 138",
+      "type": "papel",
+      "keywords": [
+        "tinta",
+        "papel",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "papel_4",
+      "title": "Configuração de Papel",
+      "content": "Alinhamento docabe çotedeimpress ão.......................................................................................... 152 7Como alinhar ocabe çotedeimpress ãousando umutilitáriodocomputador .............................. 152 Como limpar ocaminho dopapel ..................................................................................................... 154 Verifica çãodonúmero defolhas alimentadas .................................................................................. 155",
+      "type": "papel",
+      "keywords": [
+        "limpar",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_5",
+      "title": "Configuração de Papel",
+      "content": "Requisitos desistema para Mac ...................................................................................................... 214 Especifica çõesdopapel ................................................................................................................... 214 Especifica çõesdeáreaimprim ível................................................................................................... 216 Especifica çõesdedigitaliza ção........................................................................................................ 218",
+      "type": "papel",
+      "keywords": [
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_6",
+      "title": "Configuração de Papel",
+      "content": "Usodeimpress ãoatrav ésdedispositivo móvelcom Windows 10 Usodoaplicativo Epson Print and Scan com tablets Windows Botõeseluzes dopainel decontrole 1 Botãoeluz ligar 2 Luzes Wi-Fi e Wi-Fi Direct deestado darede 3 Botão Wi-Fi 4 Botão estado darede 5 Botão cópiaem P&B 6 Botão cópiaemcores 7 Botãocancelar 138 Luzes tinta epapel Estado daluz Condi ção/solu ção Aluz ligar estáacesa. Oproduto estáligado. Aluz Wi-Fi estáacesa. Oproduto estáconectando auma rede sem fios Aluz Wi-Fi Direct está acesa.Oproduto estáconectado aumdispositivo atrav ésde Wi-Fi Direct. Tema principal: Informa çõesbásicas doproduto",
+      "type": "papel",
+      "keywords": [
+        "rede",
+        "cópia",
+        "tinta",
+        "digitalizar",
+        "wifi",
+        "imprimir",
+        "painel",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_7",
+      "title": "Configuração de Papel",
+      "content": "Localiza çãodaspartes doproduto Veja estas seçõespara identificar aspartes doseuproduto. Partes doproduto -frente Partes doproduto -parte interna Partes doproduto -parte traseira Tema principal: Informa çõesbásicas doproduto Partes doproduto -frente 141 Alimentador traseiro 2 Suporte depapel 3 Guias daborda 4 Protetor doalimentador 5 Bandeja desaída 6 Aparador depapel Tema principal: Localiza çãodaspartes doproduto Partes doproduto -parte interna 1 Tampa doscanner 2 Vidro doscanner 153 Painel decontrole 1 Unidade doscanner 2 Tampa dotanque detinta 3 Tampa dotanque detinta",
+      "type": "papel",
+      "keywords": [
+        "tinta",
+        "digitalizar",
+        "duplex",
+        "painel",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_8",
+      "title": "Configuração de Papel",
+      "content": "outro dispositivo sem precisar deumroteador ouponto deacesso sem fio.Emmodo Wi-Fi, oproduto agecomo oponto deacesso darede para até8dispositivos. 1 Produto Epson 2 Computador com uma interface sem fio 3 Outro dispositivo sem fio Ativar omodo Wi-Fi Direct Tema principal: Rede Wi-Fi Ativar omodo Wi-Fi Direct Vocêpode ativar omodo Wi-Fi Direct para permitir acomunica çãodireta entre oseuproduto eum computador ououtro dispositivo sem umroteador ouponto deacesso wireless. Certifique-se deque tenha papel carregado antes decome çar.",
+      "type": "papel",
+      "keywords": [
+        "wifi",
+        "papel",
+        "rede"
+      ]
+    },
+    {
+      "id": "papel_9",
+      "title": "Configuração de Papel",
+      "content": "Direct pisquem alternadamente. Depois solte osdois botões. Quando asluzes Wi-Fi e Wi-Fi Direct seapagarem, o Wi-Fi estar ádesativado. Tema principal: Modifica çãoouatualiza çãodasconex õesderede 37Como colocar papel Antes deimprimir, coloque opapel para otipodeimpress ãoquevaifazer. Carregamento depapel noalimentador defolhas Capacidade decarregamento dopapel Capacidade deimpress ãodedois lados Papéis Epson compat íveis Compatibilidade depapel para impress ãosem margens Configura çõesdetipodepapel oumídia Carregamento depapel noalimentador defolhas",
+      "type": "papel",
+      "keywords": [
+        "rede",
+        "carregar",
+        "configurar",
+        "duplex",
+        "wifi",
+        "imprimir",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_10",
+      "title": "Configuração de Papel",
+      "content": "Vocêpode imprimir documentos efotos emuma variedade detipos etamanhos depapel. 1.Mova oprotetor doalimentador para afrente edepois levante osuporte. 2.Deslize asguias daborda completamente para fora. 383.Puxe abandeja desaídaeabra oaparador dopapel. 4.Seforcolocar uma pilha depapel, abane asfolhas primeiro ebata apilha sobre uma superf ície plana para alinhar asbordas. Observa ção:Nãoabane ouenrole papel fotogr áfico. 5.Execute umdosseguintes procedimentos: •Coloque opapel com aface brilhante oudeimpress ãovoltada para cima, com amargem estreita primeiro, nocentro dosuporte depapel.",
+      "type": "papel",
+      "keywords": [
+        "imprimir",
+        "duplex",
+        "papel",
+        "carregar"
+      ]
+    },
+    {
+      "id": "papel_11",
+      "title": "Como Carregar Papel",
+      "content": "39•Carregue até10envelopes nocentro dosuporte depapel. Coloque-os com olado imprim ível para cima ecom aborda daabapara aesquerda. •Carregue uma folha depapel avulsa ououtro papel com orifíciosdispostos conforme mostrado. •Para carregar uma folha depapel mais longa doquetamanho ofício,feche osuporte enivele e borda principal dopapel conforme mostrado. 406.Deslize asguias deborda contra opapel, mas nãoaperte muito. Depois mova aprote çãodo alimentador para trás. Sempre siga estas diretrizes decoloca çãodepapel: •Coloque apenas onúmero recomendado defolhas.",
+      "type": "papel",
+      "keywords": [
+        "papel",
+        "carregar"
+      ]
+    },
+    {
+      "id": "papel_12",
+      "title": "Configuração de Papel",
+      "content": "•Nãocoloque objetos noprotetor doalimentador. Isso pode prevenir aalimenta çãodopapel. •Nãodeixe papel naimpressora, pois opapel pode curvar ouaqualidade eimpress ãopode decair. •Seusar papel com perfura çõespara fichário,carregue uma folha decada vezsónestes tamanhos: Carta (216 ×279mm), A4(210 ×297mm), ou Ofício(216 ×357mm). Tema principal: Como colocar papel Refer ências relacionadas Capacidade decarregamento dopapel Especifica çõesdopapel 41Capacidade decarregamento dopapel Tipo depapel Capacidade decarregamento Papel normal Papel decópia Tamanho Carta (216 ×279mm), A4",
+      "type": "papel",
+      "keywords": [
+        "papel",
+        "cópia",
+        "qualidade",
+        "carregar"
+      ]
+    },
+    {
+      "id": "papel_13",
+      "title": "Configuração de Papel",
+      "content": "(210 ×297mm), Executivo (184 ×267mm), Meia carta (140 ×216mm) ou A6(105 ×148mm): 100 folhas Tamanho Ofício(216 ×357mm), 8,5×13pol. (216 ×330mm), México-Of ício(216 ×340mm) ou Ofício9(215 ×315mm): 1folha Epson Presentation Paper Matte Epson High Quality Ink Jet Paper80folhas Epson Premium Presentation Paper Matte Epson Photo Paper Glossy Epson Premium Photo Paper Glossy Epson Ultra Premium Photo Paper Glossy Epson Premium Photo Paper Semi-gloss Epson Value Photo Paper Glossy20folhas Seopapel alimentar incorretamente ouaimpress ão ficar desigual ouborrada, carregue uma folha de cada vez.",
+      "type": "papel",
+      "keywords": [
+        "tinta",
+        "papel",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "papel_14",
+      "title": "Configuração de Papel",
+      "content": "Epson Premium Presentation Paper Matte Double-sided1folha Envelopes 10envelopes Tema principal: Como colocar papel Capacidade deimpress ãodedois lados Vocêpode imprimir nosdois lados dopapel nostipos etamanhos depapel listados aqui. 42Tipo depapel Tamanho Capacidade de impress ãodedois lados Papel normal Papel decópia Carta (216 ×279mm), A4 (210 ×297mm), Executivo (184 ×267 mm), Meia carta (140 ×216mm) ou A6 (105 ×148mm)30folhas Tamanho Ofício(216 ×357mm), México-Of ício(216 ×340mm), 8,5×13 pol.(216 ×330mm), Ofício9 (215 ×315mm) oudefinido pelo usuário1folha Epson Premium Presentation Paper",
+      "type": "papel",
+      "keywords": [
+        "cópia",
+        "carregar",
+        "duplex",
+        "imprimir",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_15",
+      "title": "Configuração de Papel",
+      "content": "Matte Double-sided Carta (216 ×279mm) 1folha Vocênãopode imprimir nosdois lados nosseguintes tipos depapel: •Epson High Quality Ink Jet Paper •Epson Presentation Paper Matte •Epson Photo Paper Glossy •Epson Value Photo Paper Glossy •Epson Premium Photo Paper Glossy •Epson Premium Photo Paper Semi-gloss •Epson Ultra Premium Photo Paper Glossy •Epson Premium Presentation Paper Matte •Envelopes Tema principal: Como colocar papel Papéis Epson compat íveis Vocêtamb émpode comprar tinta epapel genu ínosda Epson atrav ésdeumrevendedor autorizado.",
+      "type": "papel",
+      "keywords": [
+        "tinta",
+        "carregar",
+        "duplex",
+        "imprimir",
+        "papel",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "papel_16",
+      "title": "Configuração de Papel",
+      "content": "Para encontrar orevendedor deprodutos mais próximo, visite ositeepson.com.br ouentre emcontato com oescrit ório Epson mais próximo. Observa ção:Adisponibilidade depapel/m ídiavaria deacordo com opaís. 43Tipo depapel Tamanho Número de refer ência Número de folhas Epson High Quality Ink Jet Paper A4(210 ×297mm) S041117 100 Carta (216 ×279mm) S041111 100 Epson Photo Paper Glossy 102×152mm S041809 S04203850 100 A4(210 ×297mm)S041140 20 Carta (216 ×279mm) S041141 20 Epson Premium Photo Paper Glossy102×152mm S041727 100 127×178mm S041464 20 203×254mm S041465 20 Carta (216 ×279mm) S041286-ML S04166720 50",
+      "type": "papel",
+      "keywords": [
+        "tinta",
+        "papel",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "papel_17",
+      "title": "Configuração de Papel",
+      "content": "Epson Ultra Premium Photo Paper Glossy102×152mm S042181 S04217460 100 127×178mm S041945 20 203×254mm S041946 20 Carta (216 ×279mm) S042182 S04217525 50 Epson Premium Photo Paper Semi-gloss102×152mm S041982 40 Carta (216 ×279mm) S041331-ML 20 Epson Presentation Paper Matte Carta (216 ×279mm) S041257-ML 50 Epson Premium Presentation Paper Matte203×254mm S041467 50 Carta (216 ×279mm) S041257-ML 50 Epson Premium Presentation Paper Matte Double-sided Carta (216 ×279mm) S041568 50 44Tipo depapel Tamanho Número de refer ência Número de folhas Epson Value Photo Paper Glossy Carta (216 ×279mm) S400031 50",
+      "type": "papel",
+      "keywords": [
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_18",
+      "title": "Configuração de Papel",
+      "content": "102×152mm S400032 S400033 S40003420 50 100 Tema principal: Como colocar papel Compatibilidade depapel para impress ãosem margens Vocêpode imprimir fotos sem margens emtipos etamanhos depapel compat íveis: Tipos depapel para imprimir sem margens •Epson Premium Photo Paper Glossy •Epson Ultra Premium Photo Paper Glossy •Epson Photo Paper Glossy •Epson Premium Photo Paper Semi-gloss •Epson Value Photo Paper Glossy Tamanhos depapel sem margens 102×152mm Tema principal: Como colocar papel Configura çõesdetipodepapel oumídia Para este papel Selecione esta configura ção Papel normal Papel decópia",
+      "type": "papel",
+      "keywords": [
+        "cópia",
+        "carregar",
+        "configurar",
+        "imprimir",
+        "papel"
+      ]
+    },
+    {
+      "id": "papel_19",
+      "title": "Configuração de Papel",
+      "content": "Epson Presentation Paper Matte Epson High Quality Ink Jet Paper Papel Normal/Bright White Paper Epson Ultra Premium Photo Paper Glossy Ultra Premium Photo Paper Glossy 45Para este papel Selecione esta configura ção Epson Premium Photo Paper Glossy Premium Photo Paper Glossy Epson Photo Paper Glossy Epson Value Photo Paper Glossy Photo Paper Glossy Epson Premium Photo Paper Semi-gloss Premium Photo Paper Semi-Gloss Epson Premium Presentation Paper Matte Epson Premium Presentation Paper Matte Double- sided Premium Presentation Paper Matte Envelopes Envelope Tema principal: Como colocar papel",
+      "type": "papel",
+      "keywords": [
+        "tinta",
+        "carregar",
+        "configurar",
+        "papel",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "cartuchos_0",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Como recarregar atinta .......................................................................................................................... 127 Precau çõesdeseguran çadatinta................................................................................................... 127 Verifica çãodosníveisdetinta noseuproduto ................................................................................. 129 Desativa çãodasofertas especiais com Windows ............................................................................ 130",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "carregar"
+      ]
+    },
+    {
+      "id": "cartuchos_1",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Especifica çõesdetinta..................................................................................................................... 218 Especifica çõesdedimens ão............................................................................................................ 219 Especifica çõeselétricas ................................................................................................................... 220 Especifica çõesambientais ............................................................................................................... 220",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta"
+      ]
+    },
+    {
+      "id": "cartuchos_2",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "4 Unidade dostanques detinta 5 Tanques detinta 6 Tampa frontal 7 Suporte daunidade doscanner 8 Cabe çotedeimpress ão Tema principal: Localiza çãodaspartes doproduto 16Partes doproduto -parte traseira 1 Entrada AC 2 Porta USB Tema principal: Localiza çãodaspartes doproduto Temporizadores derepouso edesligamento Oproduto entra emmodo derepouso oudesliga automaticamente senãoforutilizado porumcerto tempo apósentrar nomodo dedescanso. Vocêpode ajustar otempo para ogerenciamento deenergia come çar,mas aumentar otempo reduz aeficiência deenergia doproduto.",
+      "type": "cartuchos",
+      "keywords": [
+        "digitalizar",
+        "tinta"
+      ]
+    },
+    {
+      "id": "cartuchos_3",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Tema principal: Impress ãoemum Mac Tarefas relacionadas Como selecionar asconfigura çõesbásicas deimpress ão-Mac Verifica çãodoestado daimpress ão-Mac Durante aimpress ão,vocêpode veroprogresso dotrabalho deimpress ão,controlar aimpress ãoe verificar oestado dosníveisdetinta. 1.Clique noícone daimpressora quando eleaparecer no Dock. 91Vocêveráajanela deestado daimpress ão: 2.Selecione asseguintes opçõesconforme necess áriopara asuaversãodo Mac OS: •Para cancelar aimpress ão,clique notrabalho deimpress ãoeclique em ouem Apagar .",
+      "type": "cartuchos",
+      "keywords": [
+        "configurar",
+        "tinta"
+      ]
+    },
+    {
+      "id": "cartuchos_4",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "configura çãoderesolu çãopara 600dpi. •Vocêirádigitalizar aimagem a100%, oumenos, dotamanho original. Selecione aresolu çãono Epson Scan 2dependendo decomo forutilizar aimagem digitalizada: •E-mail/visualizar emteladecomputador/colocar nainternet: 96a200dpi •Imprimir/enviar porfax/converter emtexto editável(OCR)/criar PDF pesquis ável:200a300dpi Tema principal: Digitaliza çãono Epson Scan 2 127Como recarregar atinta Quando oníveldatinta estiver abaixo dalinha mais baixa dotanque, épreciso recarreg á-la.",
+      "type": "cartuchos",
+      "keywords": [
+        "rede",
+        "tinta",
+        "carregar",
+        "configurar",
+        "digitalizar",
+        "imprimir",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "cartuchos_5",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "crian çasusem asgarrafas para beber ouquemanuseiem asgarrafas detinta eastampas das garrafas. •Nãoincline oubalance uma garrafa detinta depois deabri-la ouatinta pode vazar. •Tenha cuidado para nãotocar natinta quando manusear ostanques detinta, astampas dotanque e garrafas abertas outampas dasgarrafas. •Seatinta entrar emcontato com apele, lave-a cuidadosamente com águaesabão.Seatinta entrar nosolhos, lave-os imediatamente com água. Seatinta entrar nasuaboca, cuspa atinta econsulte ummédico imediatamente. •Nãoaperte asgarrafas detinta.",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "manutenção"
+      ]
+    },
+    {
+      "id": "cartuchos_6",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "•Este produto requer manuseio cuidadoso datinta. Atinta pode espirrar quando ostanques detinta forem carregados ourecarregados com tinta. Seatinta entrar emcontato com asuaroupa ou pertences, elapode manch á-lospermanentemente. •Nãoabra aembalagem dagarrafa detinta atéqueesteja pronto para carregar umtanque detinta. As garrafas detinta sãoembaladas avácuopara manter afiabilidade. Sedeixar uma garrafa detinta desembalada pormuito tempo antes deusá-la,aqualidade deimpress ãopode serafetada. •Seoníveldatinta estiver abaixo dalinha inferior emumtanque detinta, recarregue atinta. Ouso",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "carregar",
+        "manutenção",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "cartuchos_7",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "contínuodeste produto quando oníveldatinta estáabaixo dalinha inferior emumtanque detinta pode danificar oproduto. •Façauma inspe çãovisual dosníveisdastintas nostanques detinta doproduto, para confirmar a quantia realdetinta restante Ousocontínuodeste produto quando atinta estáabaixo dalinha inferior emumtanque detinta pode danificar oproduto. •Nãodeixe queoníveldatinta fique baixo durante muito tempo. •AEpson recomenda quecarregue todos ostanques detinta atéalinha superior quando oproduto nãoestiver sendo usado.",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta"
+      ]
+    },
+    {
+      "id": "cartuchos_8",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "•Depois detrazer uma garrafa detinta deumlocal frio,permita queelaaque çaàtemperatura ambiente porpelo menos trêshoras antes deusá-la. •Useagarrafa detinta antes dadata devencimento impressa naembalagem. •Depois deabrir uma garrafa detinta, a Epson recomenda queelaseja usada assim queposs ível. •Limpe qualquer tinta aoredor dostanques eportas usando umpano limpo esem fiapos ouum cotonete. •Guarde asgarrafas emumlocal fresco eescuro. Deixe-as longe deluzsolar direta. •Nãoguarde garrafas detinta emtemperaturas altas oucongelantes.",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta"
+      ]
+    },
+    {
+      "id": "cartuchos_9",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "•Guarde asgarrafas nomesmo ambiente queoproduto. Quando guardar outransportar uma garrafa detinta aberta, nãoincline agarrafa enãodeixe queelasofra impacto oumudan çasdetemperatura. Caso contr ário,atinta pode vazar mesmo queatampa dagarrafa esteja colocada com firmeza. Certifique-se demanter agarrafa detinta depéquando apertar atampa etenha cuidado para prevenir queatinta vaze quando transportar agarrafa. 129Informa çãodagarrafa edotanque detinta •Para manter ocabe çotedeimpress ãofuncionando damelhor maneira poss ível,umpouco detinta é",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "manutenção"
+      ]
+    },
+    {
+      "id": "cartuchos_10",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Cuidado: Useluvas descart áveisquando recarregar ostanques detinta para evitar manchar assuas mãos.Seatinta derramar, limpe imediatamente aáreacom uma toalha úmida para evitar manchas permanentes. Seatinta entrar emcontato com asuaroupa oupertences, elapode manch á-los permanentemente. 1.Abra atampa dotanque detinta. 2.Abra acobertura dotanque detinta quevaicarregar. Observa ção:Certifique-se dequeacordaetiqueta dotanque detinta corresponda àcordatinta quedeseja recarregar. 1343.Segure agarrafa detinta depéegirelentamente eremova atampa dagarrafa.",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "carregar",
+        "manutenção"
+      ]
+    },
+    {
+      "id": "cartuchos_11",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "depois coloque agarrafa depélentamente para inseri-la. Aguarde atéqueatinta encha otanque. 135Nãoaperte agarrafa. Atinta corre para otanque epara automaticamente quando eleenche atéa linha superior. Observa ção:Nãoforce asgarrafas nolugar; elas sãoprojetadas para cada cor. 136Observa ção:Seatinta nãocorrer dagarrafa, levante ereinsira agarrafa. Noentanto, nãoremova ereinsira agarrafa detinta quando atinta houver alcan çadoalinha superior; caso contr ário,atinta pode vazar. 6.Quando otanque detinta estiver cheio, remova agarrafa detinta efeche firmemente atampa do",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta"
+      ]
+    },
+    {
+      "id": "cartuchos_12",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "tanque detinta, conforme mostrado. Observa ção:Nãodeixe agarrafa detinta inserida; caso contr ário,agarrafa pode ficar danificada ouatinta pode vazar. 137Observa ção:Sealguma tinta permanecer nagarrafa detinta, recoloque atampa dagarrafa e feche-a com firmeza. Guarde agarrafa navertical para usá-lamais tarde. 7.Repita ospassos anteriores, conforme necess ário,para cada tanque detinta quedesejar carregar. 8.Feche atampa dotanque detinta. Tema principal: Como recarregar atinta Conceitos relacionados Compre tintas Epson Refer ências relacionadas Precau çõesdeseguran çadatinta",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "carregar"
+      ]
+    },
+    {
+      "id": "cartuchos_13",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "precise limpar osjatos deimpress ão.Alimpeza utiliza tinta, portanto, sólimpe osjatos sehouver um declínionaqualidade daimpress ão. Vocêpode verificar sehájatos entupidos antes defazer alimpeza, assim nãofaráalimpeza desnecessariamente. Observa ção:Vocêpode nãoconseguir limpar ocabe çotedeimpress ãoquando oníveldetinta estiver baixo emalgum dostanques. Énecess árioquerecarregue otanque detinta primeiro. Caso ainda veja linhas brancas ouescuras, oucaso haja espa çosembranco nosseus impressos mesmo depois delimpar ocabe çotedeimpress ãováriasvezes, vocêpode fazer uma limpeza intensa.",
+      "type": "cartuchos",
+      "keywords": [
+        "limpar",
+        "tinta",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "cartuchos_14",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Verifica çãodosjatos deimpress ão Limpeza docabe çotedeimpress ão Limpeza intensa Tema principal: Ajuste daqualidade deimpress ão Temas relacionados Como recarregar atinta Verifica çãodosjatos deimpress ão Vocêpode imprimir ummodelo deverifica çãodosjatos para verificar sehájatos entupidos. Como verificar osjatos usando osbotõesdoproduto 139Verifica çãodosjatos usando umutilitáriodocomputador Tema principal: Manuten çãodocabe çotedeimpress ão Como verificar osjatos usando osbotõesdoproduto Vocêpode checar osjatos docabe çotedeimpress ãousando osbotõesdoproduto.",
+      "type": "cartuchos",
+      "keywords": [
+        "limpar",
+        "tinta",
+        "carregar",
+        "imprimir",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "cartuchos_15",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Certifique-se dequecada tanque detinta tenha pelo menos umterçodetinta antes decome çaruma Limpeza intensa oupode danificar oproduto. Cuidado: ALimpeza intensa pode fazer com queasalmofadas detinta alcancem suacapacidade mais rapidamente. Quando uma almofada detinta chegar aofimdesuavida útil,oproduto para deimprimir e vocêprecisa entrar emcontato com a Epson para obter suporte técnico. Execu çãodeuma Limpeza intensa usando umutilitáriodocomputador Tema principal: Manuten çãodocabe çotedeimpress ão Temas relacionados Como recarregar atinta",
+      "type": "cartuchos",
+      "keywords": [
+        "limpar",
+        "manutenção",
+        "tinta",
+        "carregar",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "cartuchos_16",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "Seprecisar guardar oproduto outransport á-loporuma certa distância, prepare-o para transporte conforme descrito aqui. Cuidado :Durante otransporte earmazenamento, siga estas instru ções: •Quando guardar outransportar aimpressora, coloque-a nasacola deplástico edobre asacola para fechá-la. •Evite inclinar oproduto, coloc á-lonavertical ouvirá-lodecabe çapara baixo; caso contr ário,atinta pode vazar. 160•Quando guardar outransportar uma garrafa detinta depois deremover oselo, nãoincline agarrafa e nãodeixe queelasofra impacto oumudan çasdetemperatura. Caso contr ário,atinta pode vazar",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "manutenção"
+      ]
+    },
+    {
+      "id": "cartuchos_17",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "mesmo queatampa dagarrafa esteja colocada com firmeza. Certifique-se demanter agarrafa de tinta depéquando apertar atampa etenha cuidado para prevenir queatinta vaze quando transportar asgarrafas detinta. •Nãocoloque garrafas detinta abertas nacaixa com oproduto. Observa ção:Antes dearmazenar oseuproduto pormuito tempo, substitua tinta com nívelbaixo, esgotada ouvencida para evitar queocabe çotedeimpress ãofique ressecado. Guarde oseuproduto emumlocal fresco eescuro. Observa ção:Certifique-se dequeocabe çotedeimpress ãoesteja naposiçãocoberta para queatinta nãoseque. 1.Desligue oproduto.",
+      "type": "cartuchos",
+      "keywords": [
+        "tinta",
+        "manutenção"
+      ]
+    },
+    {
+      "id": "cartuchos_18",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "•Sevocêimprimiu quando osníveisdastintas estavam muito baixos para serem vistos nasjanelas do tanque, recarregue ostanques detinta atéaslinhas superiores eexecute outilitáriode Elimina ção total datinta. Façauma verifica çãodosjatos para verseaqualidade deimpress ãomelhorou. •Sevocênãousar oproduto durante muito tempo, execute outilitáriodelimpeza intensa. Observa ção:Alimpeza intensa consome muita tinta, entãoexecute esse utilitáriosomente senão conseguir melhorar aqualidade deimpress ãofazendo alimpeza ocabe çotedeimpress ão.",
+      "type": "cartuchos",
+      "keywords": [
+        "limpar",
+        "tinta",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "cartuchos_19",
+      "title": "Gerenciamento de Cartuchos",
+      "content": "•Certifique-se dequeaconfigura ção Preto/Tons decinza ou Tons decinza nãoestáselecionada no software dasuaimpressora. •Sevocêselecionou Vívido padrão(Windows) ou Vívido normal (Mac) como aconfigura çãode qualidade nosoftware daimpressora, tente selecionar Padr ão(Windows) ou Normal (Mac). •Execute uma verifica çãodosjatos deimpress ãopara versealgum dosjatos estáentupido. Em seguida, limpe ocabe çotedeimpress ão,senecess ário. •Osníveisdatinta podem estar baixos evocêpode terquerecarregar atinta. Façauma inspe ção visual dosníveisdatinta.",
+      "type": "cartuchos",
+      "keywords": [
+        "driver",
+        "tinta",
+        "carregar",
+        "configurar",
+        "qualidade"
+      ]
+    },
+    {
+      "id": "conectividade_0",
+      "title": "Configuração de Rede",
+      "content": "Usodeimpress ãoatrav ésdedispositivo móvelcom Windows 10.................................................... 22 Usodoaplicativo Epson Print and Scan com tablets Windows ......................................................... 23 Rede Wi-Fi .................................................................................................................................................. 24 Recomenda çãodeseguran çaderede .............................................................................................. 24",
+      "type": "conectividade",
+      "keywords": [
+        "imprimir",
+        "digitalizar",
+        "wifi",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_1",
+      "title": "Configuração de Rede",
+      "content": "Configura çãodomodo Wi-Fi Direct ................................................................................................... 25 Ativar omodo Wi-Fi Direct ............................................................................................................. 25 Wi-Fi Protected Setup (WPS) ............................................................................................................. 26 Usodo WPS para conectar auma rede ........................................................................................ 26",
+      "type": "conectividade",
+      "keywords": [
+        "configurar",
+        "conectar",
+        "wifi",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_2",
+      "title": "Configuração de Rede",
+      "content": "Impress ãodeuma folha deestado darede ....................................................................................... 27 Impress ãodeumrelatóriodeconex ãoderede ................................................................................. 27 Códigos emensagens dorelatóriodeconex ãoderede ................................................................ 28 Modifica çãoouatualiza çãodasconex õesderede ............................................................................ 35",
+      "type": "conectividade",
+      "keywords": [
+        "wifi",
+        "papel",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_3",
+      "title": "Configuração de Rede",
+      "content": "Opçõesdeimagem econfigura çõesadicionais -Windows ...................................................... 61 Configura çõesdecabe çalho/rodap é-Windows ....................................................................... 62 Seleçãodeuma predefini çãodeimpress ão-Windows ................................................................ 63 Seleçãodasconfigura çõesavan çadas -Windows ........................................................................ 65 Defini çõesexpandidas -Windows ............................................................................................ 66",
+      "type": "conectividade",
+      "keywords": [
+        "configurar",
+        "wifi",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_4",
+      "title": "Configuração de Rede",
+      "content": "Oproduto nãoaparece najanela deimpressora do Mac ............................................................ 173 Aconex ãoderede sem fiosestáinstávelemum Mac ................................................................ 174 Nãoéposs ívelimprimir emrede ................................................................................................. 174 Nãoéposs íveldigitalizar emrede ............................................................................................... 176",
+      "type": "conectividade",
+      "keywords": [
+        "imprimir",
+        "digitalizar",
+        "wifi",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_5",
+      "title": "Configuração de Rede",
+      "content": "Especifica çõesdeinterface .............................................................................................................. 220 Especifica çõesde Interface derede ................................................................................................ 221 Avisos ....................................................................................................................................................... 222 Instru çõesimportantes deseguran ça.............................................................................................. 222",
+      "type": "conectividade",
+      "keywords": [
+        "wifi",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_6",
+      "title": "Configuração de Rede",
+      "content": "4.Selecione operíododesejado para Temporizador derepouso . 5.Clique em Aplicar . 6.Seamensagem deconfirma çãoaparecer, clique em Sim efeche ajanela dedefini çõesda impressora. Tema principal: Temporizadores derepouso edesligamento Usodoaplicativo para dispositivo móvel Epson Smart Panel Useeste aplicativo gratuito para dispositivos Apple e Android para configurar oseuproduto Epson e depois imprimir, copiar oudigitalizar com oseuproduto Epson conectado àrede. OEpson Smart Panel tamb émpermite queverifique oestado doproduto.",
+      "type": "conectividade",
+      "keywords": [
+        "rede",
+        "cópia",
+        "conectar",
+        "configurar",
+        "digitalizar",
+        "wifi",
+        "imprimir",
+        "painel"
+      ]
+    },
+    {
+      "id": "conectividade_7",
+      "title": "Configuração de Rede",
+      "content": "1.Visite ositeepson.com.br/connect para mais informa çõessobre o Epson Smart Panel everificar a compatibilidade doseudispositivo inteligente. 2.Baixe o Epson Smart Panel da App Store da Apple oudalojado Google Play. 3.Conecte oseudispositivo móvelàrede sem fiosàqual deseja conectar oseuproduto ouàmesma rede sem fiosqueoseuproduto (seoproduto jáestiver configurado). 194.Execute umdosseguintes procedimentos: •Seainda nãoconfigurou oseuproduto, abra o Epson Smart Panel esiga asinstru çõespara configurar oproduto. •Seoseuproduto jáestiver configurado, abra o Epson Smart Panel eselecione oseuproduto",
+      "type": "conectividade",
+      "keywords": [
+        "rede",
+        "conectar",
+        "configurar",
+        "wifi",
+        "painel"
+      ]
+    },
+    {
+      "id": "conectividade_8",
+      "title": "Configuração de Rede",
+      "content": "Epson, senecess ário. Agora estátudo pronto para imprimir, copiar oudigitalizar com oseudispositivo móveleoseuproduto Epson. Tema principal: Informa çõesbásicas doproduto Temas relacionados Rede Wi-Fi Soluções Epson Connect para smartphones, tablets emais Useoseusmartphone, tablet oucomputador para imprimir oudigitalizar decasa, doescrit óriooudo outro lado doplaneta, documentos, fotos, e-mails epáginas dainternet. Observa ção:Seestiver usando oseuproduto Epson com osistema operacional Windows 10S,você nãopode usar osoftware descrito nesta seção.Vocêtamb émnãopode baixar einstalar qualquer",
+      "type": "conectividade",
+      "keywords": [
+        "driver",
+        "rede",
+        "cópia",
+        "cartucho",
+        "conectar",
+        "configurar",
+        "digitalizar",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_9",
+      "title": "Configuração de Rede",
+      "content": "Usodeimpress ãoatrav ésdedispositivo móvelcom Windows 10 Usodoaplicativo Epson Print and Scan com tablets Windows 20Usodo Epson Email Print Com o Epson Email Print, vocêpode imprimir apartir dequalquer dispositivo quepossa enviar e-mail, como umsmartphone, tablet oulaptop. Basta ativar oendere çodeemail único doseuproduto. Quando quiser imprimir, anexe um PDF, umdocumento do Microsoft Office ouuma fotoaumemail eenvie-o para oseuproduto. Tanto oemail como osanexos serãoimpressos automaticamente. 1.Conecte oseuproduto àrede. Veja olinkabaixo.",
+      "type": "conectividade",
+      "keywords": [
+        "rede",
+        "tinta",
+        "digitalizar",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_10",
+      "title": "Configuração de Rede",
+      "content": "Temas relacionados Rede Wi-Fi Usodo Epson Remote Print Com osoftware Epson Remote Print, vocêpode imprimir doseulaptop oucomputador demesa de qualquer lugar domundo emumproduto Epson habilitado para e-mail. 1.Conecte oseuproduto Epson àrede wireless. Veja olinkabaixo. 2.Sevocêainda nãoconfigurou uma conta do Epson Connect quando instalou osoftware doproduto, visite ositeepsonconnect.com para criar asuaconta eregistrar oproduto noservi ço Epson Connect. Observa ção:Anote oendere çodee-mail doproduto. 3.Visite ositeepsonconnect.com para saber mais sobre o Remote Print ecomo baixar osoftware",
+      "type": "conectividade",
+      "keywords": [
+        "driver",
+        "rede",
+        "tinta",
+        "conectar",
+        "configurar",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_11",
+      "title": "Configuração de Rede",
+      "content": "Remote Print Driver. 4.Baixe einstale osoftware Epson Remote Print. 5.Digite oendere çodee-mail echave opcional deacesso doproduto Epson durante aconfigura ção do Remote Print. 216.Agora estátudo pronto para imprimir remotamente. Selecione ocomando para imprimir doseu laptop oucomputador demesa eselecione odriver Remote Print para oseuproduto Epson. Tema principal: Soluções Epson Connect para smartphones, tablets emais Temas relacionados Rede Wi-Fi Configura çãodeimpress ãoemum Chromebook Asuaimpressora Epson suporta aimpress ãonativa em Chromebook, permitindo queimprima deum",
+      "type": "conectividade",
+      "keywords": [
+        "driver",
+        "rede",
+        "conectar",
+        "configurar",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_12",
+      "title": "Configuração de Rede",
+      "content": "Chromebook sem drivers oucabos. Para instru çõesdecomo configurar asuaimpressora, visite Configura çãodasuaimpressora Epson no seu Chromebook . Tema principal: Informa çõesbásicas doproduto Impress ãoapartir deum Android usando o Epson Print Enabler Vocêpode imprimir sem fiososseus documentos, e-mails, fotos epáginas dainternet diretamente do seutelefone outablet Android (Android v4.4 ouposterior). Com alguns toques, oseudispositivo Android descobrir áoseuproduto Epson mais próximo eimprimir á. 1.Conecte oseuproduto Epson àrede wireless. Veja olinkabaixo.",
+      "type": "conectividade",
+      "keywords": [
+        "driver",
+        "rede",
+        "tinta",
+        "conectar",
+        "configurar",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_13",
+      "title": "Configuração de Rede",
+      "content": "2.Noseudispositivo Android, baixe oplug-in do Epson Print Enabler dalojado Google Play. 3.VáatéSettings (Configura ções)noseudispositivo Android, selecione Printing (Impress ão)e habilite oplug-in da Epson, senecess ário. 4.Conecte oseudispositivo Android àmesma rede wireless queoseuproduto. 5.Agora estátudo pronto para imprimir. Apartir deumaplicativo Android, como Chrome ou Gmail, toque noícone demenu eimprima oqueestiver natela. Observa ção:Caso nãoveja oseuproduto toque em All Printers (Todas asimpressoras) e selecione oseuproduto. Tema principal: Informa çõesbásicas doproduto Temas relacionados",
+      "type": "conectividade",
+      "keywords": [
+        "rede",
+        "configurar",
+        "menu",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_14",
+      "title": "Configuração de Rede",
+      "content": "Rede Wi-Fi 22Usodaimpress ãocom Fire OS Vocêpode imprimir sem fiosnoseuproduto Epson narede apartir detablets etelefones Amazon Fire. Nãohásoftware para baixar, drivers para instalar oucabos para conectar. Com apenas alguns toques eme-mail, calend ário,contatos e WPS Office, vocêpode enviar oconte údodasuatelapara umproduto Epson. 1.Conecte oseuproduto Epson àrede wireless. Veja olinkabaixo. 2.Conecte oseudispositivo Amazon àmesma rede wireless queoseuproduto. 3.Agora estátudo pronto para imprimir. Apartir doseuaplicativo da Amazon, toque naopçãode",
+      "type": "conectividade",
+      "keywords": [
+        "driver",
+        "rede",
+        "cartucho",
+        "conectar",
+        "tinta",
+        "configurar",
+        "menu",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_15",
+      "title": "Configuração de Rede",
+      "content": "impress ãopara selecionar oseuproduto para imprimir oconte údodatela. Observa ção:Caso veja uma mensagem avisando queumplug-in énecess ário,toque em OKe toque em Download .Seoseuproduto Amazon Fireusar o Fire OS5ousuperior, oseudispositivo utiliza automaticamente oaplicativo Mopria Print Service integrado para imprimir. Tema principal: Informa çõesbásicas doproduto Temas relacionados Rede Wi-Fi Usodeimpress ãoatrav ésdedispositivo móvelcom Windows 10 Vocêpode imprimir sem fiosnoseuproduto Epson narede apartir detablets etelefones com Windows",
+      "type": "conectividade",
+      "keywords": [
+        "imprimir",
+        "wifi",
+        "carregar",
+        "rede"
+      ]
+    },
+    {
+      "id": "conectividade_16",
+      "title": "Configuração de Rede",
+      "content": "10.Nãohásoftware para baixar, drivers para instalar oucabos para conectar. Procure pela opçãode impress ãonoseuaplicativo do Windows 10para enviar oconte údodatelapara umproduto Epson. 1.Conecte oseuproduto Epson àrede wireless. Veja olinkabaixo. 2.Conecte oseudispositivo móvelcom Windows 10àmesma rede wireless queoseuproduto. 3.Agora estátudo pronto para imprimir. Apartir doseuaplicativo do Windows 10,toque naopçãode impress ãopara selecionar oseuproduto para imprimir oconte údodatela. Tema principal: Informa çõesbásicas doproduto Temas relacionados Rede Wi-Fi",
+      "type": "conectividade",
+      "keywords": [
+        "driver",
+        "rede",
+        "cartucho",
+        "conectar",
+        "tinta",
+        "configurar",
+        "menu",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_17",
+      "title": "Configuração de Rede",
+      "content": "23Usodoaplicativo Epson Print and Scan com tablets Windows Vocêpode usar este aplicativo gratuito para imprimir fotos edigitalizar apartir doseutablet Windows (Windows 8ousuperior) Surface RTou Procom produtos Epson emrede. Oaplicativo Epson Print and Scan permite quevocêdigitalize ecapture imagens diretamente noseutablet ou Microsoft One Drive. Observa ção:Oaplicativo Epson Print and Scan nãosuporta aimpress ãocom Windows 10Mobile e nãodispõedefunçõesdedigitaliza çãopara produtos sem scanners. 1.Conecte oseuproduto Epson àrede wireless. Consulte olinkabaixo.",
+      "type": "conectividade",
+      "keywords": [
+        "rede",
+        "tinta",
+        "digitalizar",
+        "wifi",
+        "imprimir"
+      ]
+    },
+    {
+      "id": "conectividade_18",
+      "title": "Configuração de Rede",
+      "content": "2.Baixe oaplicativo Epson Print and Scan da Microsoft Windows Store. 3.Conecte oseutablet com Windows àmesma rede wireless queoseuproduto. 4.Abra oaplicativo Epson Print and Scan eselecione oseuproduto Epson. Agora estátudo pronto para imprimir suas fotos edigitalizar. Tema principal: Informa çõesbásicas doproduto Temas relacionados Rede Wi-Fi 24Rede Wi-Fi Consulte estas seçõespara usar oseuproduto emuma rede Wi-Fi. Recomenda çãodeseguran çaderede Configura çãodomodo Wi-Fi Direct Wi-Fi Protected Setup (WPS) Impress ãodeuma folha deestado darede Impress ãodeumrelatóriodeconex ãoderede",
+      "type": "conectividade",
+      "keywords": [
+        "rede",
+        "configurar",
+        "digitalizar",
+        "wifi",
+        "imprimir",
+        "papel"
+      ]
+    },
+    {
+      "id": "conectividade_19",
+      "title": "Configuração de Rede",
+      "content": "Modifica çãoouatualiza çãodasconex õesderede Recomenda çãodeseguran çaderede Para ajudar adissuadir acesso nãoautorizado aoproduto emuma rede, vocêdeve proteger oseu ambiente derede usando medidas deseguran çaapropriadas. Medidas deseguran çacomo estas podem ajudar adissuadir amea çascomo perda dedados de usuário,usodelinhas detelefone efaxeoutras intrus ões: •Ative aseguran çanasuarede sem fio Ative aseguran çaadequada narede sem fioquepretende usar com oproduto. Aseguran çadarede, como uma senha derede, pode dissuadir aintercepta çãodetráfego narede sem fio.Oseuroteador",
+      "type": "conectividade",
+      "keywords": [
+        "wifi",
+        "rede"
+      ]
+    }
+  ]
+}
