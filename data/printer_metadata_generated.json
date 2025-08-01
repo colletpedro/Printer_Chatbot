@@ -1,0 +1,296 @@
+{
+  "generated_at": "2025-07-25T14:22:26.505253",
+  "total_models": 11,
+  "metadata": {
+    "ImpressoraL375": {
+      "full_name": "Epson IMPRESSORAL375",
+      "aliases": [],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L3000",
+      "description": "Epson IMPRESSORAL375 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.375503"
+    },
+    "impressoraL1300": {
+      "full_name": "Epson L1300",
+      "aliases": [
+        "Epson L1300",
+        "L 1300",
+        "L1300",
+        "epson L1300",
+        "epson l1300",
+        "l 1300",
+        "l1300"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L1000",
+      "description": "Epson L1300 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.381084"
+    },
+    "impressoraL3110": {
+      "full_name": "Epson L3110",
+      "aliases": [
+        "Epson L3110",
+        "L 3110",
+        "L3110",
+        "epson L3110",
+        "epson l3110",
+        "l 3110",
+        "l3110"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L3000",
+      "description": "Epson L3110 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.389379"
+    },
+    "impressoraL3150": {
+      "full_name": "Epson L3150",
+      "aliases": [
+        "Epson L3150",
+        "L 3150",
+        "L3150",
+        "epson L3150",
+        "epson l3150",
+        "l 3150",
+        "l3150"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L3000",
+      "description": "Epson L3150 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.398843"
+    },
+    "impressoraL3250_L3251": {
+      "full_name": "Epson L3250_L3251",
+      "aliases": [
+        "Epson L3250",
+        "L 3250",
+        "L3250",
+        "L3251",
+        "epson L3250",
+        "epson L3251",
+        "epson l3250",
+        "epson l3251",
+        "l 3250",
+        "l3250",
+        "l3251"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L3000",
+      "description": "Epson L3250_L3251 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.410783"
+    },
+    "impressoraL375": {
+      "full_name": "Epson L375",
+      "aliases": [],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L3000",
+      "description": "Epson L375 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.419469"
+    },
+    "impressoraL4150": {
+      "full_name": "Epson L4150",
+      "aliases": [
+        "Epson L4150",
+        "L 4150",
+        "L4150",
+        "epson L4150",
+        "epson l4150",
+        "l 4150",
+        "l4150"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L4000",
+      "description": "Epson L4150 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.428880"
+    },
+    "impressoraL4260": {
+      "full_name": "Epson L4260",
+      "aliases": [
+        "Epson L4260",
+        "L 4260",
+        "L4260",
+        "epson L4260",
+        "epson l4260",
+        "l 4260",
+        "l4260"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L4000",
+      "description": "Epson L4260 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.443446"
+    },
+    "impressoraL4260 (1)": {
+      "full_name": "Epson L4260 (1)",
+      "aliases": [
+        "Epson L4260",
+        "L 4260",
+        "L4260",
+        "epson L4260",
+        "epson l4260",
+        "l 4260",
+        "l4260"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L4000",
+      "description": "Epson L4260 (1) - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.460219"
+    },
+    "impressoral5190": {
+      "full_name": "Epson L5190",
+      "aliases": [
+        "5190",
+        "Epson 5190",
+        "L 5190",
+        "epson 5190",
+        "l 5190"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L5000",
+      "description": "Epson L5190 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.478576"
+    },
+    "impressoral6490": {
+      "full_name": "Epson L6490",
+      "aliases": [
+        "6490",
+        "Epson 6490",
+        "L 6490",
+        "epson 6490",
+        "l 6490"
+      ],
+      "type": "colorida",
+      "features": [
+        "duplex",
+        "adf",
+        "wifi",
+        "ecotank",
+        "usb",
+        "multifuncional",
+        "cloud",
+        "mobile",
+        "ethernet"
+      ],
+      "series": "L6000",
+      "description": "Epson L6490 - Impressora multifuncional colorida com sistema EcoTank, impressão duplex, ADF, Wi-Fi",
+      "auto_generated": true,
+      "generated_at": "2025-07-25T14:22:26.504846"
+    }
+  }
+}
