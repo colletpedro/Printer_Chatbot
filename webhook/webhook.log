@@ -1,0 +1,617 @@
+2025-07-25 11:47:57,249 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 11:47:57,249 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 11:48:39,439 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 11:48:39,440 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 11:49:17,232 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 11:49:17,232 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 11:49:23,014 - INFO - 📨 Webhook notification received:
+2025-07-25 11:49:23,014 - INFO -    Channel ID: 5ac207a4-e6e9-44a4-8d29-ebbd73aec261
+2025-07-25 11:49:23,014 - INFO -    Resource State: sync
+2025-07-25 11:49:23,014 - INFO -    Message Number: 1
+2025-07-25 11:49:23,016 - INFO - 🔄 Sync message received - webhook channel is active
+2025-07-25 11:49:23,017 - INFO - 127.0.0.1 - - [25/Jul/2025 11:49:23] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:49:58,795 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 11:49:58,795 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 11:50:03,680 - INFO - 📨 Webhook notification received:
+2025-07-25 11:50:03,680 - INFO -    Channel ID: 82e79bbb-c91b-44dc-9b90-3ba761764ab9
+2025-07-25 11:50:03,680 - INFO -    Resource State: sync
+2025-07-25 11:50:03,680 - INFO -    Message Number: 1
+2025-07-25 11:50:03,682 - INFO - 🔄 Sync message received - webhook channel is active
+2025-07-25 11:50:03,682 - INFO - 127.0.0.1 - - [25/Jul/2025 11:50:03] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:50:03,827 - INFO - 127.0.0.1 - - [25/Jul/2025 11:50:03] "GET /health HTTP/1.1" 200 -
+2025-07-25 11:51:19,521 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 11:51:19,522 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 11:51:24,411 - INFO - 127.0.0.1 - - [25/Jul/2025 11:51:24] "GET /health HTTP/1.1" 200 -
+2025-07-25 11:51:24,510 - INFO - 📨 Webhook notification received:
+2025-07-25 11:51:24,511 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:51:24,511 - INFO -    Resource State: sync
+2025-07-25 11:51:24,511 - INFO -    Message Number: 1
+2025-07-25 11:51:24,513 - INFO - 🔄 Sync message received - webhook channel is active
+2025-07-25 11:51:24,513 - INFO - 127.0.0.1 - - [25/Jul/2025 11:51:24] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:54:06,785 - INFO - 📨 Webhook notification received:
+2025-07-25 11:54:06,785 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:54:06,785 - INFO -    Resource State: update
+2025-07-25 11:54:06,785 - INFO -    Message Number: 126410
+2025-07-25 11:54:06,788 - INFO - 📁 Processing update event...
+2025-07-25 11:54:06,788 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:54:06,979 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:54:06,980 - INFO - 127.0.0.1 - - [25/Jul/2025 11:54:06] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:54:10,286 - INFO - 📨 Webhook notification received:
+2025-07-25 11:54:10,286 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:54:10,286 - INFO -    Resource State: trash
+2025-07-25 11:54:10,286 - INFO -    Message Number: 166162
+2025-07-25 11:54:10,287 - INFO - ℹ️ Ignoring resource state: trash
+2025-07-25 11:54:10,287 - INFO - 127.0.0.1 - - [25/Jul/2025 11:54:10] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:54:34,942 - INFO - 📨 Webhook notification received:
+2025-07-25 11:54:34,942 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:54:34,942 - INFO -    Resource State: update
+2025-07-25 11:54:34,942 - INFO -    Message Number: 126410
+2025-07-25 11:54:34,944 - INFO - 📁 Processing update event...
+2025-07-25 11:54:34,944 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:54:35,108 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:54:35,109 - INFO - 127.0.0.1 - - [25/Jul/2025 11:54:35] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:55:04,484 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:04] "GET /health HTTP/1.1" 200 -
+2025-07-25 11:55:04,876 - INFO - 📨 Webhook notification received:
+2025-07-25 11:55:04,877 - INFO -    Channel ID: test-channel-1753455304
+2025-07-25 11:55:04,877 - INFO -    Resource State: sync
+2025-07-25 11:55:04,877 - INFO -    Message Number: 1
+2025-07-25 11:55:04,877 - WARNING - ⚠️ Invalid webhook notification - verification failed
+2025-07-25 11:55:04,879 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:04] "[31m[1mPOST /drive-webhook HTTP/1.1[0m" 403 -
+2025-07-25 11:55:05,272 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:05] "GET /webhook-status HTTP/1.1" 200 -
+2025-07-25 11:55:23,046 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 11:55:23,046 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 11:55:27,985 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:27] "GET /health HTTP/1.1" 200 -
+2025-07-25 11:55:28,148 - INFO - 📨 Webhook notification received:
+2025-07-25 11:55:28,148 - INFO -    Channel ID: f19ec848-a04c-4673-ab5e-7e2b868a4da0
+2025-07-25 11:55:28,148 - INFO -    Resource State: sync
+2025-07-25 11:55:28,148 - INFO -    Message Number: 1
+2025-07-25 11:55:28,150 - INFO - 🔄 Sync message received - webhook channel is active
+2025-07-25 11:55:28,151 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:28] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:55:31,254 - INFO - 📨 Webhook notification received:
+2025-07-25 11:55:31,255 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:55:31,255 - INFO -    Resource State: update
+2025-07-25 11:55:31,255 - INFO -    Message Number: 126410
+2025-07-25 11:55:31,256 - INFO - 📁 Processing update event...
+2025-07-25 11:55:31,256 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:55:31,393 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:55:31,393 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:31] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:55:38,047 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:38] "GET /health HTTP/1.1" 200 -
+2025-07-25 11:55:38,442 - INFO - 📨 Webhook notification received:
+2025-07-25 11:55:38,442 - INFO -    Channel ID: test-channel-1753455338
+2025-07-25 11:55:38,442 - INFO -    Resource State: sync
+2025-07-25 11:55:38,442 - INFO -    Message Number: 1
+2025-07-25 11:55:38,442 - WARNING - ⚠️ Invalid webhook notification - verification failed
+2025-07-25 11:55:38,444 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:38] "[31m[1mPOST /drive-webhook HTTP/1.1[0m" 403 -
+2025-07-25 11:55:38,863 - INFO - 127.0.0.1 - - [25/Jul/2025 11:55:38] "GET /webhook-status HTTP/1.1" 200 -
+2025-07-25 11:57:06,982 - INFO - 📨 Webhook notification received:
+2025-07-25 11:57:06,983 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:57:06,983 - INFO -    Resource State: untrash
+2025-07-25 11:57:06,983 - INFO -    Message Number: 342674
+2025-07-25 11:57:06,984 - INFO - ℹ️ Ignoring resource state: untrash
+2025-07-25 11:57:06,984 - INFO - 127.0.0.1 - - [25/Jul/2025 11:57:06] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:57:06,989 - INFO - 📨 Webhook notification received:
+2025-07-25 11:57:06,989 - INFO -    Channel ID: f19ec848-a04c-4673-ab5e-7e2b868a4da0
+2025-07-25 11:57:06,989 - INFO -    Resource State: untrash
+2025-07-25 11:57:06,989 - INFO -    Message Number: 98996
+2025-07-25 11:57:06,989 - INFO - ℹ️ Ignoring resource state: untrash
+2025-07-25 11:57:06,990 - INFO - 127.0.0.1 - - [25/Jul/2025 11:57:06] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:57:09,095 - INFO - 📨 Webhook notification received:
+2025-07-25 11:57:09,095 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:57:09,095 - INFO -    Resource State: trash
+2025-07-25 11:57:09,095 - INFO -    Message Number: 344725
+2025-07-25 11:57:09,098 - INFO - ℹ️ Ignoring resource state: trash
+2025-07-25 11:57:09,098 - INFO - 127.0.0.1 - - [25/Jul/2025 11:57:09] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:57:11,099 - INFO - 📨 Webhook notification received:
+2025-07-25 11:57:11,100 - INFO -    Channel ID: f19ec848-a04c-4673-ab5e-7e2b868a4da0
+2025-07-25 11:57:11,100 - INFO -    Resource State: trash
+2025-07-25 11:57:11,100 - INFO -    Message Number: 101047
+2025-07-25 11:57:11,101 - INFO - ℹ️ Ignoring resource state: trash
+2025-07-25 11:57:11,101 - INFO - 127.0.0.1 - - [25/Jul/2025 11:57:11] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 11:57:31,614 - INFO - 127.0.0.1 - - [25/Jul/2025 11:57:31] "GET /health HTTP/1.1" 200 -
+2025-07-25 11:57:53,288 - INFO - 📨 Webhook notification received:
+2025-07-25 11:57:53,289 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:57:53,289 - INFO -    Resource State: update
+2025-07-25 11:57:53,289 - INFO -    Message Number: 126410
+2025-07-25 11:57:53,291 - INFO - 📁 Processing update event...
+2025-07-25 11:57:53,291 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:57:53,419 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:57:53,420 - INFO - 127.0.0.1 - - [25/Jul/2025 11:57:53] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:58:45,138 - INFO - 📨 Webhook notification received:
+2025-07-25 11:58:45,139 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:58:45,139 - INFO -    Resource State: update
+2025-07-25 11:58:45,139 - INFO -    Message Number: 441045
+2025-07-25 11:58:45,142 - INFO - 📁 Processing update event...
+2025-07-25 11:58:45,143 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:58:45,328 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:58:45,328 - INFO - 127.0.0.1 - - [25/Jul/2025 11:58:45] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:58:45,404 - INFO - 📨 Webhook notification received:
+2025-07-25 11:58:45,404 - INFO -    Channel ID: f19ec848-a04c-4673-ab5e-7e2b868a4da0
+2025-07-25 11:58:45,404 - INFO -    Resource State: update
+2025-07-25 11:58:45,404 - INFO -    Message Number: 197367
+2025-07-25 11:58:45,405 - INFO - 📁 Processing update event...
+2025-07-25 11:58:45,405 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:58:45,499 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:58:45,500 - INFO - 127.0.0.1 - - [25/Jul/2025 11:58:45] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:59:15,751 - INFO - 📨 Webhook notification received:
+2025-07-25 11:59:15,752 - INFO -    Channel ID: f19ec848-a04c-4673-ab5e-7e2b868a4da0
+2025-07-25 11:59:15,752 - INFO -    Resource State: update
+2025-07-25 11:59:15,752 - INFO -    Message Number: 197367
+2025-07-25 11:59:15,753 - INFO - 📁 Processing update event...
+2025-07-25 11:59:15,753 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:59:15,768 - INFO - 📨 Webhook notification received:
+2025-07-25 11:59:15,768 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:59:15,768 - INFO -    Resource State: update
+2025-07-25 11:59:15,768 - INFO -    Message Number: 441045
+2025-07-25 11:59:15,769 - INFO - 📁 Processing update event...
+2025-07-25 11:59:15,769 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:59:15,886 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:59:15,886 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:59:15,887 - INFO - 127.0.0.1 - - [25/Jul/2025 11:59:15] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:59:15,887 - INFO - 127.0.0.1 - - [25/Jul/2025 11:59:15] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:59:51,169 - INFO - 📨 Webhook notification received:
+2025-07-25 11:59:51,170 - INFO -    Channel ID: f19ec848-a04c-4673-ab5e-7e2b868a4da0
+2025-07-25 11:59:51,170 - INFO - 📨 Webhook notification received:
+2025-07-25 11:59:51,170 - INFO -    Resource State: update
+2025-07-25 11:59:51,170 - INFO -    Channel ID: 6dd5c28a-c8c2-4bd0-9c73-505f8ddd0956
+2025-07-25 11:59:51,170 - INFO -    Message Number: 197367
+2025-07-25 11:59:51,170 - INFO -    Resource State: update
+2025-07-25 11:59:51,171 - INFO -    Message Number: 441045
+2025-07-25 11:59:51,173 - INFO - 📁 Processing update event...
+2025-07-25 11:59:51,173 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:59:51,173 - INFO - 📁 Processing update event...
+2025-07-25 11:59:51,176 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 11:59:51,356 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:59:51,357 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 11:59:51,357 - INFO - 127.0.0.1 - - [25/Jul/2025 11:59:51] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 11:59:51,358 - INFO - 127.0.0.1 - - [25/Jul/2025 11:59:51] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 12:01:06,629 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 12:01:06,629 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 12:01:11,548 - INFO - 127.0.0.1 - - [25/Jul/2025 12:01:11] "GET /health HTTP/1.1" 200 -
+2025-07-25 12:01:11,837 - INFO - 📨 Webhook notification received:
+2025-07-25 12:01:11,837 - INFO -    Channel ID: 00064bf7-f6b3-4c0a-b31d-26a15b861d66
+2025-07-25 12:01:11,837 - INFO -    Resource State: sync
+2025-07-25 12:01:11,837 - INFO -    Message Number: 1
+2025-07-25 12:01:11,839 - INFO - 🔄 Sync message received - webhook channel is active
+2025-07-25 12:01:11,840 - INFO - 127.0.0.1 - - [25/Jul/2025 12:01:11] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:06:33,359 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.86:8080
+2025-07-25 12:06:33,359 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-25 12:06:38,178 - INFO - 📨 Webhook notification received:
+2025-07-25 12:06:38,179 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:06:38,179 - INFO -    Resource State: sync
+2025-07-25 12:06:38,179 - INFO -    Message Number: 1
+2025-07-25 12:06:38,182 - INFO - 🔄 Sync message received - webhook channel is active
+2025-07-25 12:06:38,182 - INFO - 127.0.0.1 - - [25/Jul/2025 12:06:38] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:06:38,193 - INFO - 127.0.0.1 - - [25/Jul/2025 12:06:38] "GET /health HTTP/1.1" 200 -
+2025-07-25 12:08:38,863 - INFO - 📨 Webhook notification received:
+2025-07-25 12:08:38,865 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:08:38,865 - INFO -    Resource State: trash
+2025-07-25 12:08:38,865 - INFO -    Message Number: 121000
+2025-07-25 12:08:38,867 - INFO - ℹ️ Ignoring resource state: trash
+2025-07-25 12:08:38,867 - INFO - 127.0.0.1 - - [25/Jul/2025 12:08:38] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:08:59,989 - INFO - 📨 Webhook notification received:
+2025-07-25 12:08:59,989 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:08:59,989 - INFO -    Resource State: update
+2025-07-25 12:08:59,989 - INFO -    Message Number: 142074
+2025-07-25 12:08:59,991 - INFO - 📁 Processing update event...
+2025-07-25 12:08:59,991 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:09:00,161 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 12:09:00,162 - INFO - 127.0.0.1 - - [25/Jul/2025 12:09:00] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 12:09:36,631 - INFO - 📨 Webhook notification received:
+2025-07-25 12:09:36,631 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:09:36,631 - INFO -    Resource State: update
+2025-07-25 12:09:36,631 - INFO -    Message Number: 142074
+2025-07-25 12:09:36,633 - INFO - 📁 Processing update event...
+2025-07-25 12:09:36,633 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:09:36,798 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 12:09:36,799 - INFO - 127.0.0.1 - - [25/Jul/2025 12:09:36] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 12:09:56,360 - INFO - 127.0.0.1 - - [25/Jul/2025 12:09:56] "GET /health HTTP/1.1" 200 -
+2025-07-25 12:10:08,729 - INFO - 📨 Webhook notification received:
+2025-07-25 12:10:08,729 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:10:08,729 - INFO -    Resource State: update
+2025-07-25 12:10:08,729 - INFO -    Message Number: 142074
+2025-07-25 12:10:08,732 - INFO - 📁 Processing update event...
+2025-07-25 12:10:08,732 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:10:08,901 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 12:10:08,902 - INFO - 127.0.0.1 - - [25/Jul/2025 12:10:08] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 12:10:25,849 - INFO - 📨 Webhook notification received:
+2025-07-25 12:10:25,850 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:10:25,850 - INFO -    Resource State: update
+2025-07-25 12:10:25,850 - INFO -    Message Number: 1
+2025-07-25 12:10:25,852 - INFO - 📁 Processing update event...
+2025-07-25 12:10:25,852 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:10:26,000 - ERROR - ❌ Update script failed: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 67, in main
+    service = get_drive_service()
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../core/update_drive.py", line 22, in get_drive_service
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/drive.readonly']
+    )
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/oauth2/service_account.py", line 260, in from_service_account_file
+    info, signer = _service_account_info.from_filename(
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        filename, require=["client_email", "token_uri"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/venv/lib/python3.13/site-packages/google/auth/_service_account_info.py", line 78, in from_filename
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'key.json'
+
+2025-07-25 12:10:26,001 - INFO - 127.0.0.1 - - [25/Jul/2025 12:10:26] "[35m[1mPOST /drive-webhook HTTP/1.1[0m" 500 -
+2025-07-25 12:11:16,351 - INFO - 📨 Webhook notification received:
+2025-07-25 12:11:16,351 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:11:16,351 - INFO -    Resource State: update
+2025-07-25 12:11:16,351 - INFO -    Message Number: 142074
+2025-07-25 12:11:16,355 - INFO - 📁 Processing update event...
+2025-07-25 12:11:16,355 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:11:19,500 - INFO - 📨 Webhook notification received:
+2025-07-25 12:11:19,500 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:11:19,500 - INFO -    Resource State: update
+2025-07-25 12:11:19,500 - INFO -    Message Number: 2
+2025-07-25 12:11:19,502 - INFO - 📁 Processing update event...
+2025-07-25 12:11:19,502 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:11:45,228 - INFO - ✅ Knowledge base updated successfully!
+2025-07-25 12:11:45,229 - INFO - 🔧 Gerando metadados automáticos para novos modelos...
+2025-07-25 12:11:45,255 - INFO - ✅ Metadados atualizados automaticamente!
+2025-07-25 12:11:45,256 - INFO - 127.0.0.1 - - [25/Jul/2025 12:11:45] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:11:46,860 - INFO - ✅ Knowledge base updated successfully!
+2025-07-25 12:11:46,860 - INFO - 🔧 Gerando metadados automáticos para novos modelos...
+2025-07-25 12:11:46,881 - INFO - ✅ Metadados atualizados automaticamente!
+2025-07-25 12:11:46,882 - INFO - 127.0.0.1 - - [25/Jul/2025 12:11:46] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:13:13,966 - INFO - 📨 Webhook notification received:
+2025-07-25 12:13:13,966 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:13:13,966 - INFO -    Resource State: update
+2025-07-25 12:13:13,966 - INFO -    Message Number: 142074
+2025-07-25 12:13:13,970 - INFO - 📁 Processing update event...
+2025-07-25 12:13:13,970 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:13:38,586 - INFO - ✅ Knowledge base updated successfully!
+2025-07-25 12:13:38,586 - INFO - 🔧 Gerando metadados automáticos para novos modelos...
+2025-07-25 12:13:38,707 - WARNING - ⚠️ Geração de metadados falhou: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../scripts/generate_printer_metadata.py", line 329, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../scripts/generate_printer_metadata.py", line 316, in main
+    print(f"   • Arquivo gerado: {os.path.basename(filename)}")
+                                                   ^^^^^^^^
+NameError: name 'filename' is not defined
+
+2025-07-25 12:13:38,708 - INFO - 127.0.0.1 - - [25/Jul/2025 12:13:38] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:15:34,225 - INFO - 📨 Webhook notification received:
+2025-07-25 12:15:34,225 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:15:34,225 - INFO -    Resource State: update
+2025-07-25 12:15:34,225 - INFO -    Message Number: 3
+2025-07-25 12:15:34,228 - INFO - 📁 Processing update event...
+2025-07-25 12:15:34,228 - INFO - 🔄 Starting knowledge base update...
+2025-07-25 12:15:58,065 - INFO - ✅ Knowledge base updated successfully!
+2025-07-25 12:15:58,065 - INFO - 🔧 Gerando metadados automáticos para novos modelos...
+2025-07-25 12:15:58,187 - WARNING - ⚠️ Geração de metadados falhou: Traceback (most recent call last):
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../scripts/generate_printer_metadata.py", line 329, in <module>
+    main()
+    ~~~~^^
+  File "/Users/pedrocollet/Downloads/GeminiMGI/webhook/../scripts/generate_printer_metadata.py", line 316, in main
+    print(f"   • Arquivo gerado: {os.path.basename(filename)}")
+                                                   ^^^^^^^^
+NameError: name 'filename' is not defined
+
+2025-07-25 12:15:58,189 - INFO - 127.0.0.1 - - [25/Jul/2025 12:15:58] "POST /drive-webhook HTTP/1.1" 200 -
+2025-07-25 12:52:43,092 - INFO - 📨 Webhook notification received:
+2025-07-25 12:52:43,093 - INFO -    Channel ID: fa8d96f4-9761-485a-a330-dbb16526ee48
+2025-07-25 12:52:43,093 - INFO -    Resource State: trash
+2025-07-25 12:52:43,093 - INFO -    Message Number: 2765249
+2025-07-25 12:52:43,097 - INFO - ℹ️ Ignoring resource state: trash
+2025-07-25 12:52:43,098 - INFO - 127.0.0.1 - - [25/Jul/2025 12:52:43] "POST /drive-webhook HTTP/1.1" 200 -

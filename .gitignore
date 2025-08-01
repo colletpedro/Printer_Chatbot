@@ -1,30 +1,10 @@
-# Chaves de API e arquivos sensíveis
-core/key.json
-*.key
-*.pem
-*.p12
-*.pfx
-*.crt
-*.cert
+# Ambiente virtual
+venv/
+env/
+ENV/
+.venv/
 
-# Arquivos de ambiente
-.env
-.env.local
-.env.production
-.env.staging
-
-# Logs
-*.log
-webhook.log
-data/webhook.log
-
-# Banco de dados e storage
-chromadb_storage/
-*.db
-*.sqlite
-*.sqlite3
-
-# Cache e arquivos temporários
+# Cache do Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -46,19 +26,6 @@ wheels/
 .installed.cfg
 *.egg
 
-# Ambiente virtual
-venv/
-env/
-ENV/
-.venv/
-
-# IDEs e editores
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
 # Sistema operacional
 .DS_Store
 .DS_Store?
@@ -66,19 +33,4 @@ ENV/
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db
-
-# Arquivos de backup
-*.bak
-*.backup
-*.old
-
-# Arquivos de dados sensíveis
-data/manual_complete.json
-data/processing_log.json
-data/webhook_activity.json
-data/webhook_channels.json
-
-# PDFs baixados (opcional - remover se quiser incluir)
-pdfs_downloaded/
-webhook/pdfs_downloaded/ 
+Thumbs.db 

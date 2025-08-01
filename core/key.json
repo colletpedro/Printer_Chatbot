@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "geminimgi",
+  "private_key_id": "53b05ada6a42d00fa79eac074fdefa213faf7078",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCYdA2y6IQDH0j8\nCbSXL94optioJ9uaqaG26wxvhSRnkXSv0EQXtnWVgoyLbVS8bWRA3GSnXsZIiPjz\n6UwsbwYR5PtqJ148icpb/4chya5ZRLneTFk/iPDpDjyw2zMNtGyHNKwi2SOKCt+x\nmJ9Vu0q4fHhWXs+bmZV3j5jUzm9355fHYJaoLXqlIKVqHp/5iqIyAGjS5hpdTPmq\nfkYLnLDTJaxekDVUFN7UxmblyToTyde+8/ZkNCeQ9iaggPQPtmK5M04hzKSOHLOe\nObluAyQN+bN1uOoOTjBLiY1zr595jH/sgpuBMsCjS3lKmsVhL41eURaD0gPN9Ht/\nnEUmLzD/AgMBAAECggEARM0nO4Ucwq31Sa11nz9+krkNkQH/5RJGBZ+ZSqD7N3RZ\nBVlHya3R7gnvNKNAORNjSbRNBo3KjYSnWaiBdJIcWqoM3rDqogaLWS5+RTzYHrhZ\n651oL7i1BHCk6inapgY1bmVShB2boNpcbrFSwyWVyKF/y3bZWb8bycv37J5HhwQ+\nz7Y61I7FTKK62w7/2lXmZN33Rm+/qyG0ap3LndAw4D6yrYc0J2uPdilNJYcyukFQ\nZ/vYuVjKRiDeW/pVXfVoZCQoh9SvQ5ccuF7Co9unZ+xDhWEUfAV46wjZ3tFcqMXP\n8ZifHrKnIhagdt1JbjKUhFWyNOgXSs6cxcZ1wNFmJQKBgQDI9fVH77TYX5bBlNdX\npfw5khIKdTNQUArMJXJX2oK7tqQWwEL2peNbmX6rJlNB3yZd039He7Rte4/qwbNZ\nRYO5EbM3OWoZrGOJVyqb/89oO+oqbLWQ4XcwKiq3VRo49sjd41VFyqO8MbsAEh2g\nnxO0tLFC0hdztbrC7KZvZEUihQKBgQDCNRL7XHHiQQmaLS0v2H6GGUqYphfMXAmu\nzNRO3Cu3inYBCAr9VaMNbHaCbZ2Vao7K4GejN51WHO/kMPSRneWFjTwYNMfw7HG5\nYAfHgY/bPmZ+U7w9drBqK0h0PK976iwEQ4lPktbcEV51BvJhS4qBXAND+QfF0OVq\nYHHVb1A2swKBgFyyR3/1LAAap5mHpIVDhUKxBC1avl6vbSuZolKv8lnP94SfDsRi\n5Krd9LXRqdnaqwHgivdYMnPF6S6qRqZJEGePqJEypKRPBmLVmEv5BZzY9jy3hFDe\nD3JiIO4MDVp1S1Y+hJj6zegDMHTp5kyu1BIovxNJgZPYIdvD+UmsgM9ZAoGASSKD\ni3U8zd+AJjdtFN+KhiVwGhwyShs+6jzoluoC7JOP7MOCn/Rn+t4louh0t5fxPiVT\n4ftHnO44yM5Gy6+Sh8CwKM13nhrsmMq5I0B/VCkjn98YvGy98r1qA5v22ctN2C02\nwGij0SwZTijXjhxMhHqKIEbfznbkbjLzq1TH+FECgYEAxymQdGp3mxUzYBTkQ80G\nJdLC+HQBymnYdHAMEjTnJHTtT0Q6t69CZzcDaeuF3rTJKf51VARguuTccDjlglAj\nRg1i8j5LoGLtliexKCayUjTyowDjFWttgeEFSaL5g89NctyAXz/PVN7qwTa0tZUX\nfU6JVuHaqo1Cu3/hrOH493o=\n-----END PRIVATE KEY-----\n",
+  "client_email": "chatbot-drive-ingestor-198@geminimgi.iam.gserviceaccount.com",
+  "client_id": "104399144068351270365",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/chatbot-drive-ingestor-198%40geminimgi.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
