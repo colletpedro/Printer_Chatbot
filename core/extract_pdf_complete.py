@@ -8,6 +8,8 @@ import json
 import re
 import time
 from collections import defaultdict
+import hashlib
+import os
 
 def extract_pdf_text(pdf_path):
     """Extrai texto completo do PDF"""
@@ -26,11 +28,11 @@ def extract_pdf_text(pdf_path):
                     page_text = page.extract_text()
                     text += f"\n--- PÁGINA {i} ---\n{page_text}\n"
                 except:
-                    print(f"   ⚠️ Erro na página {i}, pulando...")
+                    print(f"    Erro na página {i}, pulando...")
                     
             return text
     except Exception as e:
-        print(f"❌ Erro ao ler PDF: {e}")
+        print(f"Erro ao ler PDF: {e}")
         return None
 
 def clean_text(text):
@@ -167,6 +169,36 @@ def create_title(content, section_type):
         words = content.split()[:8]
         return f"Seção: {' '.join(words)[:50]}..."
 
+def get_pdf_hash(pdf_path):
+    """Calcula hash MD5 do PDF para controle de atualização"""
+    hash_md5 = hashlib.md5()
+    with open(pdf_path, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
+def process_pdf_to_sections(pdf_path, printer_model=None):
+    """Processa um PDF e retorna as seções extraídas, incluindo printer_model e pdf_hash"""
+    raw_text = extract_pdf_text(pdf_path)
+    if not raw_text:
+        return []
+    chunks = extract_meaningful_chunks(raw_text)
+    pdf_hash = get_pdf_hash(pdf_path)
+    sections = []
+    for i, chunk in enumerate(chunks):
+        section_type = chunk['type']
+        section = {
+            'id': f'{printer_model or section_type}_{i}',
+            'title': create_title(chunk['content'], section_type),
+            'content': chunk['content'][:800],
+            'type': section_type,
+            'keywords': extract_keywords(chunk['content']),
+            'printer_model': printer_model or pdf_path,
+            'pdf_hash': pdf_hash
+        }
+        sections.append(section)
+    return sections
+
 def main():
     pdf_path = "impressora.pdf"
     
@@ -214,10 +246,12 @@ def main():
         'sections': final_sections[:80]  # Limita a 80 seções
     }
     
-    with open('manual_complete.json', 'w', encoding='utf-8') as f:
+    # Caminho correto para o arquivo
+    output_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'manual_complete.json')
+    with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     
-    print(f"✅ {len(output['sections'])} seções salvas em manual_complete.json")
+    print(f"✅ {len(output['sections'])} seções salvas em {os.path.basename(output_path)}")
     
     # Stats
     type_counts = defaultdict(int)
@@ -227,6 +261,3 @@ def main():
     print("\n📊 Por categoria:")
     for stype, count in type_counts.items():
         print(f"   {stype}: {count}")
-
-if __name__ == "__main__":
-    main()
