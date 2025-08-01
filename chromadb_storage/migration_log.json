@@ -1,0 +1,13 @@
+{
+  "migration_date": "2025-07-31T11:13:28.947962",
+  "collection_name": "epson_manuals",
+  "database_path": "./chromadb_storage",
+  "statistics": {
+    "total_items": 5264,
+    "migrated_items": 5184,
+    "model_used": "intfloat/multilingual-e5-base",
+    "model_type": "e5",
+    "batch_size": 128,
+    "preset_used": "multilingual-e5-base"
+  }
+}
