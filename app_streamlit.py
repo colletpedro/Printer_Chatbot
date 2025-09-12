@@ -29,17 +29,37 @@ PRINTER_MODELS = [
 # Inicialização do estado
 if 'messages' not in st.session_state:
     st.session_state.messages = []
+if 'response_mode' not in st.session_state:
+    st.session_state.response_mode = "detalhado"
 
-def generate_response(query, printer_model=None):
+def generate_response(query, printer_model=None, mode="detalhado"):
     """Gera resposta usando Gemini"""
     try:
+        # Ajusta o prompt baseado no modo
+        if mode == "rápido":
+            mode_instruction = """
+            Forneça uma resposta BREVE e DIRETA, em no máximo 3-4 frases.
+            Vá direto ao ponto principal sem muitos detalhes.
+            """
+        else:  # detalhado
+            mode_instruction = """
+            Forneça uma resposta COMPLETA e DETALHADA.
+            Inclua:
+            - Explicação passo a passo quando aplicável
+            - Possíveis causas do problema
+            - Soluções alternativas se existirem
+            - Dicas de prevenção quando relevante
+            """
+        
         prompt = f"""Você é um especialista em impressoras Epson.
         
         Modelo da impressora: {printer_model if printer_model else 'Não especificado'}
         
+        {mode_instruction}
+        
         Pergunta do usuário: {query}
         
-        Forneça uma resposta útil e clara em português."""
+        Responda em português de forma clara."""
         
         response = model.generate_content(prompt)
         
@@ -61,17 +81,36 @@ with st.sidebar:
     
     # Seleção de impressora
     selected_printer = st.selectbox(
-        "Modelo da Impressora:",
+        "🖨️ Modelo da Impressora:",
         ["Não especificado"] + PRINTER_MODELS
     )
     
+    st.markdown("---")
+    
+    # Modo de resposta
+    st.subheader("💬 Modo de Resposta")
+    response_mode = st.radio(
+        "Escolha o tipo de resposta:",
+        ["rápido", "detalhado"],
+        index=1,  # detalhado por padrão
+        help="Rápido: respostas diretas e concisas\nDetalhado: explicações completas com passo a passo"
+    )
+    st.session_state.response_mode = response_mode
+    
+    if response_mode == "rápido":
+        st.info("⚡ Respostas rápidas e diretas")
+    else:
+        st.info("📖 Respostas detalhadas com explicações")
+    
+    st.markdown("---")
+    
     # Limpar chat
-    if st.button("🗑️ Limpar Conversa"):
+    if st.button("🗑️ Limpar Conversa", use_container_width=True):
         st.session_state.messages = []
         st.rerun()
     
     st.markdown("---")
-    st.markdown("**Versão:** Minimal")
+    st.markdown("**Versão:** 1.0")
     st.markdown("**Status:** ✅ Online")
 
 # Mostrar mensagens anteriores
@@ -89,7 +128,11 @@ if prompt := st.chat_input("Digite sua pergunta sobre impressoras Epson..."):
     # Gerar e mostrar resposta
     with st.chat_message("assistant"):
         with st.spinner("Pensando..."):
-            response = generate_response(prompt, selected_printer if selected_printer != "Não especificado" else None)
+            response = generate_response(
+                prompt, 
+                selected_printer if selected_printer != "Não especificado" else None,
+                mode=st.session_state.response_mode
+            )
             st.markdown(response)
     
     # Adicionar resposta ao histórico
