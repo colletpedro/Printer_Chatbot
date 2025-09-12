@@ -42,11 +42,109 @@ def detect_printer_in_query(query):
     for model in PRINTER_MODELS:
         # Remove "Epson " do modelo para comparação mais flexível
         model_simple = model.replace("Epson ", "").lower()
-        if model_simple in query_lower or model.lower() in query_lower:
-            return model
+        # Verificar variações (com/sem espaço, com/sem traço)
+        model_variations = [
+            model_simple,
+            model_simple.replace(" ", ""),
+            model_simple.replace("-", ""),
+            model_simple.replace("l", "l "),  # L3150 → L 3150
+        ]
+        for variant in model_variations:
+            if variant in query_lower:
+                return model
     return None
 
-def generate_funnel_question(query, stage=None):
+def analyze_user_response(prompt, stage):
+    """Analisa a resposta do usuário de forma inteligente e flexível"""
+    prompt_lower = prompt.lower().strip()
+    
+    # Remover pontuação comum para melhor matching
+    import string
+    prompt_clean = prompt_lower.translate(str.maketrans('', '', string.punctuation))
+    
+    if stage == "initial" or stage is None:
+        # Verificar se usuário mencionou tipo multifuncional
+        multifuncional_keywords = [
+            "multifuncional", "multi funcional", "multi", "3 em 1", "3em1",
+            "copia", "copiar", "digitaliza", "digitalizar", "scanner", "scan",
+            "xerox", "todas as funções", "completa", "tudo", "faz tudo"
+        ]
+        
+        impressora_simples_keywords = [
+            "só imprime", "so imprime", "apenas imprime", "apenas impressora",
+            "simples", "basica", "básica", "normal", "comum",
+            "não copia", "nao copia", "não digitaliza", "nao digitaliza",
+            "impressora apenas", "somente impressora", "somente imprime"
+        ]
+        
+        # Verificar multifuncional
+        for keyword in multifuncional_keywords:
+            if keyword in prompt_clean:
+                return "multifuncional"
+        
+        # Verificar impressora simples
+        for keyword in impressora_simples_keywords:
+            if keyword in prompt_clean:
+                return "simples"
+        
+        # Verificar se usuário disse que não sabe
+        nao_sei_keywords = [
+            "não sei", "nao sei", "não lembro", "nao lembro", "esqueci",
+            "não faço ideia", "nao faco ideia", "não tenho certeza", "nao tenho certeza",
+            "talvez", "acho que"
+        ]
+        
+        for keyword in nao_sei_keywords:
+            if keyword in prompt_clean:
+                return "nao_sei"
+                
+    elif stage == "type_known":
+        # Analisar características mencionadas
+        features = {
+            "wifi": ["wifi", "wi fi", "wi-fi", "wireless", "sem fio", "rede", "internet"],
+            "tanque": ["tanque", "tanques", "tank", "ecotank", "eco tank", "refil", "bulk", "garrafa"],
+            "colorida": ["colorida", "colorido", "cores", "color", "cmyk", "cor"],
+            "pb": ["preto e branco", "pretoebranco", "pb", "p&b", "monocromatica", "mono", "só preto", "so preto"],
+            "nova": ["nova", "novo", "recente", "2024", "2023", "2022", "ano passado", "mes passado"],
+            "antiga": ["antiga", "antigo", "velha", "velho", "2019", "2018", "2017", "anos", "tempo"]
+        }
+        
+        detected_features = []
+        for feature, keywords in features.items():
+            for keyword in keywords:
+                if keyword in prompt_clean:
+                    detected_features.append(feature)
+                    break
+        
+        if detected_features:
+            return detected_features
+            
+    elif stage == "features_known":
+        # Verificar tamanho mencionado
+        tamanhos = {
+            "compacta": ["compacta", "pequena", "pequeno", "mini", "portatil", "portátil"],
+            "media": ["media", "média", "medio", "médio", "normal", "padrão", "padrao"],
+            "grande": ["grande", "gigante", "robusta", "profissional", "escritorio", "escritório"]
+        }
+        
+        for tamanho, keywords in tamanhos.items():
+            for keyword in keywords:
+                if keyword in prompt_clean:
+                    return tamanho
+        
+        # Verificar se usuário desistiu
+        desistir_keywords = [
+            "desisto", "não consigo", "nao consigo", "deixa pra lá", "deixa pra la",
+            "esquece", "cancela", "para", "pare", "sair"
+        ]
+        
+        for keyword in desistir_keywords:
+            if keyword in prompt_clean:
+                return "desistiu"
+    
+    return None
+
+def generate_funnel_question(query, stage=None, context=None):
     """Gera pergunta de afunilamento para identificar a impressora"""
     if stage is None or stage == "initial":
         return """🔍 **Preciso identificar sua impressora primeiro!**
@@ -55,42 +153,93 @@ Para fornecer a melhor assistência, preciso saber o modelo exato da sua impress
 
 **Por favor, me informe:**
 1. Você sabe o modelo da sua impressora? (Ex: L3150, L375, L4260, etc.)
-2. Se não souber, sua impressora é:
-   - **Multifuncional** (imprime, copia e digitaliza) ou
-   - **Apenas impressora** (só imprime)?
+2. Se não souber, me diga: ela **copia e digitaliza** também ou **só imprime**?
    
-Digite o modelo ou responda sobre o tipo da sua impressora."""
+💡 Dica: Pode responder de forma simples como "é multifuncional" ou "só imprime"."""
     
-    elif stage == "type_known":
-        return """📋 **Vamos descobrir o modelo específico!**
+    elif stage == "type_known_multi":
+        return """📋 **Ótimo! Sua impressora é multifuncional!**
+        
+**Agora me ajude com mais detalhes:**
+- Ela tem **Wi-Fi** ou conexão sem fio?
+- Você vê **tanques de tinta** na frente ou lateral?
+- É **colorida** ou só **preto e branco**?
+- É **nova** (últimos 2 anos) ou mais **antiga**?
+
+💡 Responda o que souber, não precisa ser tudo!"""
+    
+    elif stage == "type_known_simple":
+        return """📋 **Ok! Sua impressora é modelo simples (só imprime)!**
         
 **Me ajude com mais informações:**
-- Sua impressora tem **Wi-Fi**?
-- Ela tem **tanques de tinta** visíveis na frente ou lateral?
-- Você lembra aproximadamente quando comprou? (ano)
-- É colorida ou apenas preto e branco?"""
-    
-    elif stage == "features_known":
-        return """🎯 **Estamos quase lá!**
-        
-**Última pergunta para identificar sua impressora:**
-- Você consegue ver alguma etiqueta com o modelo na própria impressora?
-- Geralmente fica na parte frontal, superior ou traseira
-- Procure por algo como: L3150, L375, L4260, etc.
+- Ela tem **tanques de tinta** visíveis?
+- É **colorida** ou **preto e branco**?
+- Qual o **tamanho** dela? (pequena, média, grande)
 
-Se não encontrar, descreva o tamanho aproximado (compacta, média ou grande)."""
+💡 Qualquer detalhe ajuda!"""
+    
+    elif stage == "features_analyzed":
+        # Resposta baseada nas características detectadas
+        if context and isinstance(context, list):
+            features_text = "✅ Entendi! Sua impressora tem: " + ", ".join(context)
+        else:
+            features_text = "✅ Ok, anotei essas informações!"
+            
+        return f"""{features_text}
+
+🎯 **Última etapa para identificar o modelo:**
+
+Por favor, **procure uma etiqueta** na sua impressora com o modelo.
+Normalmente está em um destes lugares:
+- **Parte frontal** (próximo aos botões)
+- **Tampa superior** (ao abrir)
+- **Parte traseira** (próximo às conexões)
+
+O modelo começa com **"L"** seguido de números (Ex: L3150, L375, L4260)
+
+Consegue ver? Se não, me diga o **tamanho aproximado** da impressora."""
+    
+    elif stage == "nao_sei":
+        return """🤔 **Sem problemas! Vamos descobrir juntos!**
+
+**Me responda apenas isto:**
+Sua impressora faz **cópia e digitalização** (scanner) além de imprimir?
+
+- Se **SIM** → É multifuncional
+- Se **NÃO** → É impressora simples
+- **Não sei** → Veja se tem uma tampa em cima que abre (isso é o scanner)
+
+💡 Responda de forma simples!"""
+    
+    elif stage == "desistiu":
+        return """😔 **Entendo sua dificuldade!**
+
+**Última tentativa - Super Simples:**
+
+1. **Olhe sua impressora agora**
+2. **Procure qualquer número** que comece com **"L"**
+3. **Me diga esse número**
+
+Exemplos: L3150, L375, L805, L4260...
+
+Se realmente não conseguir, recomendo:
+- Verificar a nota fiscal
+- Olhar o manual
+- Pedir ajuda para alguém próximo
+
+Estou aqui quando conseguir a informação! 🖨️"""
     
     else:
         return """❌ **Não consigo prosseguir sem identificar sua impressora**
         
-Infelizmente, para fornecer suporte técnico preciso e seguro, preciso saber o modelo exato da sua impressora Epson.
+Para sua segurança, preciso saber o modelo exato antes de dar instruções técnicas.
 
-**Sugestões:**
-- Verifique a nota fiscal ou manual
-- Procure uma etiqueta na impressora
-- Acesse as configurações da impressora no computador
+**O que fazer:**
+1. Procure o modelo na própria impressora
+2. Verifique nota fiscal ou caixa
+3. Olhe nas configurações do computador
 
-Quando souber o modelo, me informe para eu poder ajudar! 🖨️"""
+Quando souber o modelo, volte que eu ajudo! 🖨️"""
 
 def generate_response(query, printer_model=None, mode="detalhado"):
     """Gera resposta usando Gemini - APENAS se souber o modelo da impressora"""
@@ -264,33 +413,66 @@ if prompt := st.chat_input("Digite sua pergunta sobre impressoras Epson..."):
             
             # Se não temos modelo, iniciar afunilamento
             else:
-                # Analisar resposta do usuário para avançar no afunilamento
-                prompt_lower = prompt.lower()
+                # Analisar resposta do usuário de forma inteligente
+                current_stage = st.session_state.identification_stage
+                analysis = analyze_user_response(prompt, current_stage)
                 
-                # Verificar se usuário está respondendo sobre tipo de impressora
-                if st.session_state.identification_stage == "initial":
-                    if "multifuncional" in prompt_lower or "copia" in prompt_lower or "digitaliza" in prompt_lower:
-                        st.session_state.identification_stage = "type_known"
-                    elif "só imprime" in prompt_lower or "apenas imprime" in prompt_lower:
-                        st.session_state.identification_stage = "type_known"
+                # Processar análise e atualizar estágio
+                new_stage = current_stage
+                context = None
                 
-                # Verificar se usuário está respondendo sobre recursos
-                elif st.session_state.identification_stage == "type_known":
-                    if any(word in prompt_lower for word in ["wifi", "wi-fi", "tanque", "colorida", "preto"]):
-                        st.session_state.identification_stage = "features_known"
+                if current_stage in ["initial", None]:
+                    if analysis == "multifuncional":
+                        new_stage = "type_known_multi"
+                    elif analysis == "simples":
+                        new_stage = "type_known_simple"
+                    elif analysis == "nao_sei":
+                        new_stage = "nao_sei"
+                    else:
+                        # Manter no estágio inicial se não entendeu
+                        new_stage = "initial"
                 
-                # Verificar se usuário está respondendo sobre características finais
-                elif st.session_state.identification_stage == "features_known":
-                    if any(word in prompt_lower for word in ["compacta", "média", "grande", "pequena"]):
-                        st.session_state.identification_stage = "failed"
+                elif current_stage == "nao_sei":
+                    # Segunda tentativa após usuário dizer que não sabe
+                    if analysis == "multifuncional":
+                        new_stage = "type_known_multi"
+                    elif analysis == "simples":
+                        new_stage = "type_known_simple"
+                    else:
+                        new_stage = "initial"  # Voltar ao início
+                
+                elif current_stage in ["type_known_multi", "type_known_simple", "type_known"]:
+                    if isinstance(analysis, list) and analysis:
+                        # Detectou características
+                        new_stage = "features_analyzed"
+                        context = analysis
+                    elif analysis:
+                        new_stage = "features_analyzed"
+                    else:
+                        # Não detectou nada, continuar perguntando
+                        new_stage = current_stage
+                
+                elif current_stage == "features_analyzed":
+                    if analysis == "desistiu":
+                        new_stage = "desistiu"
+                    elif analysis in ["compacta", "media", "grande"]:
+                        # Usuário deu tamanho mas não modelo
+                        new_stage = "failed"
+                    else:
+                        # Talvez digitou algo, verificar se não é um modelo
+                        # Se não for, considerar falha
+                        new_stage = "failed"
+                
+                elif current_stage == "desistiu":
+                    # Última chance
+                    new_stage = "failed"
+                
+                # Atualizar estágio
+                st.session_state.identification_stage = new_stage
                 
                 # Gerar pergunta de afunilamento apropriada
-                funnel_response = generate_funnel_question(prompt, st.session_state.identification_stage)
+                funnel_response = generate_funnel_question(prompt, new_stage, context)
                 st.markdown(funnel_response)
-                
-                # Atualizar estágio se for inicial
-                if st.session_state.identification_stage is None:
-                    st.session_state.identification_stage = "initial"
                 
                 # Adicionar resposta ao histórico
                 st.session_state.messages.append({"role": "assistant", "content": funnel_response})
