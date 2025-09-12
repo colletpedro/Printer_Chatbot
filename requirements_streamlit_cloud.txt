@@ -1,8 +1,0 @@
-# Ultra-minimal requirements for Streamlit Cloud
-# This should definitely work
-
-streamlit==1.29.0
-google-generativeai==0.3.2
-python-dotenv==1.0.0
-pandas==2.1.4
-numpy==1.24.3
