@@ -197,7 +197,7 @@ def handle_drive_notification():
                     
             except subprocess.TimeoutExpired:
                 error_msg = "Update script timed out"
-                logging.error(f"⏰ {error_msg}")
+                logging.error(f" {error_msg}")
                 log_webhook_activity('update_timeout', {'error': error_msg})
                 return jsonify({"status": "error", "message": error_msg}), 500
                 

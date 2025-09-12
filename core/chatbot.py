@@ -766,11 +766,20 @@ def check_and_reload_manual():
         # Carrega atividades do webhook
         with open(webhook_activity_path, 'r', encoding='utf-8') as f:
             activities = json.load(f)
-        
-        # Procura pela última atualização bem-sucedida
+
+        # Garante lista e tolera formatos inesperados
+        if isinstance(activities, dict):
+            activities = [activities]
+        elif not isinstance(activities, list):
+            return False, "Formato inesperado do arquivo de atividades do webhook"
+
+        # Procura pela última atualização bem-sucedida (compatível com 'type' ou 'event_type')
         last_update = None
         for activity in reversed(activities):
-            if activity.get('type') == 'update_success':
+            if not isinstance(activity, dict):
+                continue
+            event_type = activity.get('type') or activity.get('event_type')
+            if event_type == 'update_success':
                 last_update = activity.get('timestamp')
                 break
         
@@ -817,8 +826,14 @@ def check_webhook_status():
         if os.path.exists(webhook_channels_path):
             with open(webhook_channels_path, 'r') as f:
                 channels = json.load(f)
-            
-            active_channels = [c for c in channels if c.get('status') == 'active']
+
+            # Normaliza e valida formato
+            if isinstance(channels, dict):
+                channels = [channels]
+            elif not isinstance(channels, list):
+                return False, "Formato inesperado do arquivo de canais do webhook"
+
+            active_channels = [c for c in channels if isinstance(c, dict) and c.get('status') == 'active']
             
             if active_channels:
                 # Get the latest channel

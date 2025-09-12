@@ -1,0 +1,8 @@
+# Tema Navy Escuro Premium
+[theme]
+base = "dark"
+primaryColor = "#818cf8"  # Roxo suave
+backgroundColor = "#0f172a"  # Navy escuro
+secondaryBackgroundColor = "#1e293b"  # Navy médio
+textColor = "#e2e8f0"  # Texto claro
+font = "sans serif"

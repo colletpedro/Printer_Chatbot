@@ -1,0 +1,8 @@
+# Tema Carbon (Cinza Carvão)
+[theme]
+base = "dark"
+primaryColor = "#06b6d4"  # Ciano elegante
+backgroundColor = "#18181b"  # Cinza carvão
+secondaryBackgroundColor = "#27272a"  # Cinza médio
+textColor = "#fafafa"  # Texto branco suave
+font = "sans serif"

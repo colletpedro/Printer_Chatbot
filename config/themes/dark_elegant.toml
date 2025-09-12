@@ -1,0 +1,8 @@
+# Tema Escuro Elegante e Minimalista
+[theme]
+base = "dark"
+primaryColor = "#3b82f6"  # Azul elegante
+backgroundColor = "#0a0a0a"  # Preto profundo
+secondaryBackgroundColor = "#141414"  # Cinza escuro
+textColor = "#e5e5e5"  # Texto claro
+font = "sans serif"
