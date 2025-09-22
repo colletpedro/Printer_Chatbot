@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-Chatbot Epson - Interface Streamlit
-Versão limpa e funcional para deploy
+Chatbot Epson - Interface Streamlit V2
+Versão com sistema de afunilamento melhorado
+- Uma pergunta por vez
+- Sem loops de perguntas repetidas  
+- Não responde quando não entende após múltiplas tentativas
 """
 
 import streamlit as st
@@ -10,7 +13,7 @@ import re
 
 # Configuração da página
 st.set_page_config(
-    page_title="Chatbot Epson - Suporte Técnico",
+    page_title="Chatbot Epson V2 - Suporte Técnico",
     page_icon="🖨️",
     layout="wide"
 )
@@ -86,26 +89,6 @@ def analyze_user_response(prompt, stage):
     """Analisa resposta do usuário de forma linear e clara"""
     prompt_normalized = normalize_text(prompt)
     
-    # SEMPRE verificar primeiro se o usuário mencionou um modelo específico
-    # Isso tem prioridade sobre qualquer outro processamento
-    detected_model = detect_printer_in_query(prompt)
-    if detected_model:
-        st.session_state.identified_printer = detected_model
-        return "model_identified"
-    
-    # Padrão para detectar modelos com formato L#### mesmo que não estejam na lista
-    import re
-    pattern = r'[lL]\s*\d{3,4}'
-    matches = re.findall(pattern, prompt)
-    if matches:
-        # Normalizar o match para formato padrão
-        for match in matches:
-            normalized_model = match.upper().replace(" ", "")
-            if normalized_model.startswith("L") and len(normalized_model) >= 4:
-                # Assumir que é um modelo válido
-                st.session_state.identified_printer = f"Epson {normalized_model}"
-                return "model_identified"
-    
     # Respostas muito curtas ou sem contexto - ignorar
     if len(prompt_normalized) < 2:
         return None
@@ -115,10 +98,9 @@ def analyze_user_response(prompt, stage):
         return "failed"
     
     # Se o usuário está fazendo uma pergunta nova (não relacionada ao afunilamento)
-    # Mas só bloquear se não estiver no estágio inicial
     question_indicators = ["como", "porque", "por que", "quando", "onde", "o que", "qual problema", "ajuda com"]
-    if stage != "initial" and any(indicator in prompt_normalized for indicator in question_indicators):
-        # Não processar como resposta de afunilamento (exceto no inicial onde pode ser a primeira pergunta)
+    if any(indicator in prompt_normalized for indicator in question_indicators):
+        # Não processar como resposta de afunilamento
         return None
     
     # ESTÁGIO 1: Identificar tipo (multifuncional ou simples)
@@ -217,11 +199,11 @@ def analyze_user_response(prompt, stage):
         elif any(phrase in prompt_normalized for phrase in ["preto e branco", "preto branco", "pb", "monocromatica", "mono", "apenas preto", "so preto"]):
             st.session_state.funnel_features['colorida'] = False
             return "ask_size"
-        # Respostas genéricas sim/não (mais flexíveis)
-        elif prompt_normalized in ["sim", "e colorida", "sim colorida", "colorida sim", "e sim"]:
+        # Respostas genéricas só em contexto muito claro
+        elif prompt_normalized == "sim" and "color" in str(st.session_state.messages[-2:]).lower():
             st.session_state.funnel_features['colorida'] = True
             return "ask_size"
-        elif prompt_normalized in ["nao", "nao e colorida", "preto", "nao colorida", "e nao"]:
+        elif prompt_normalized == "nao" and "color" in str(st.session_state.messages[-2:]).lower():
             st.session_state.funnel_features['colorida'] = False
             return "ask_size"
         elif any(phrase in prompt_normalized for phrase in ["nao sei", "nao lembro", "nao tenho certeza"]):
@@ -246,47 +228,27 @@ def analyze_user_response(prompt, stage):
         # Não entendeu
         return None
     
-    # ESTÁGIO 6: Tentativa de identificação baseada em características
-    elif stage == "try_identify":
-        # Usuário não encontrou o modelo ou não consegue identificar
-        if any(phrase in prompt_normalized for phrase in ["nao encontro", "nao achei", "nao consigo", "nao vejo", "nao sei", "nenhum desses", "nao e nenhum"]):
-            return "ask_visual_check"
-        
-        # Usuário confirmou um dos modelos sugeridos
-        possible_models = identify_possible_models(st.session_state.funnel_features)
-        for model in possible_models:
-            model_simple = normalize_text(model.replace("Epson", "").replace("L", "l"))
-            if model_simple in prompt_normalized:
-                st.session_state.identified_printer = f"Epson {model}"
-                return "model_identified"
-        
-        # Se mencionou características adicionais, tentar novamente
-        if any(word in prompt_normalized for word in ["wifi", "tanque", "cartucho", "colorida", "preto"]):
-            return "ask_visual_check"
-        
-        # Não conseguiu identificar
-        return "ask_visual_check"
-    
-    # ESTÁGIO 7: Checagem visual final
+    # ESTÁGIO 6: Tentativa de identificação visual
     elif stage == "ask_visual_check":
-        # Usuário não conseguiu encontrar
-        if any(phrase in prompt_normalized for phrase in ["nao encontro", "nao achei", "nao consigo", "nao vejo", "nao tem etiqueta"]):
-            return "failed"
-        
-        # Qualquer outra resposta, tentar mais uma vez
+        # Procurar por qualquer menção de modelo
+        pattern = r'[lL]\s*\d{3,4}'
+        matches = re.findall(pattern, prompt)
+        if matches:
+            # Tentar detectar o modelo mencionado
+            detected = detect_printer_in_query(prompt)
+            if detected:
+                st.session_state.identified_printer = detected
+                return "model_identified"
         return "failed"
     
-    # Estados especiais - Ajuda visual para tipo
+    # Estados especiais
     elif stage == "need_visual_help":
-        if any(word in prompt_normalized for word in ["tampa", "sim", "tem", "vejo", "abre", "scanner"]):
+        if any(word in prompt_normalized for word in ["tampa", "sim", "tem", "vejo", "abre"]):
             st.session_state.funnel_features['tipo'] = 'multifuncional'
             return "ask_wifi"
-        elif any(word in prompt_normalized for word in ["nao", "sem tampa", "nao tem", "nao abre", "nao vejo"]):
+        elif any(word in prompt_normalized for word in ["nao", "sem tampa", "nao tem", "nao abre"]):
             st.session_state.funnel_features['tipo'] = 'simples'
             return "ask_tanque"
-        
-        # Não entendeu, perguntar de novo
-        return None
     
     return None
 
@@ -331,21 +293,6 @@ Escolha um:
 - **"pequena"** - Compacta, cabe em mesa pequena
 - **"média"** - Tamanho padrão de escritório
 - **"grande"** - Robusta, profissional"""
-    
-    elif stage == "try_identify":
-        return """🤔 **Não entendi sua resposta...**
-        
-Por favor:
-- Digite o **modelo** se encontrou (ex: L3150)
-- Ou diga **"não encontro"** se não consegue identificar
-- Ou confirme um dos modelos sugeridos"""
-    
-    elif stage == "ask_visual_check":
-        return """🤔 **Preciso que você procure o modelo...**
-        
-Olhe com atenção na impressora:
-- Digite o modelo se encontrar (começa com **L**)
-- Ou diga **"não achei"** se não conseguir encontrar"""
     
     # Para outros estágios, retornar None (não responder)
     return None
@@ -603,8 +550,9 @@ def generate_response(query, printer_model=None, mode="detalhado"):
         return f"Erro ao gerar resposta: {str(e)}"
 
 # Interface principal
-st.title("🖨️ Chatbot Epson - Suporte Técnico")
+st.title("🖨️ Chatbot Epson V2 - Suporte Técnico")
 st.markdown("Sistema inteligente de suporte para impressoras Epson")
+st.markdown("🆕 **Versão 2.1** - Sistema de afunilamento melhorado")
 
 # Sidebar
 with st.sidebar:
@@ -663,9 +611,13 @@ with st.sidebar:
         st.rerun()
     
     st.markdown("---")
-    st.markdown("**Versão:** 2.0")
+    st.markdown("**Versão:** 2.1 (Melhorada)")
     st.markdown("**Status:** ✅ Online")
-    st.markdown("**Modo:** Afunilamento Obrigatório")
+    st.markdown("**Modo:** Afunilamento Inteligente")
+    st.markdown("🆕 **Melhorias:**")
+    st.markdown("- Sem loops")
+    st.markdown("- Uma pergunta por vez")
+    st.markdown("- Análise contextual")
 
 # Mostrar mensagem inicial se não houver histórico
 if not st.session_state.messages and not st.session_state.identified_printer:
