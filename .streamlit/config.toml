@@ -1,21 +1,14 @@
-# Configuração do Streamlit
+[theme]
+primaryColor = "#4CAF50"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F5F5F5"
+textColor = "#262730"
+font = "sans serif"
 
 [server]
-port = 8501
-address = "localhost"
-headless = true
+maxUploadSize = 200
 enableCORS = false
 enableXsrfProtection = true
 
 [browser]
 gatherUsageStats = false
-serverAddress = "localhost"
-
-[theme]
-# Tema escuro elegante
-base = "dark"
-primaryColor = "#3b82f6"  # Azul elegante
-backgroundColor = "#0a0a0a"  # Preto profundo
-secondaryBackgroundColor = "#141414"  # Cinza escuro
-textColor = "#e5e5e5"  # Texto claro
-font = "sans serif"
