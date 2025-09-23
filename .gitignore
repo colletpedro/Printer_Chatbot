@@ -51,3 +51,4 @@ data/logs/
 core/key.json
 credentials.json
 token.json
+.streamlit/secrets.toml

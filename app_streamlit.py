@@ -40,7 +40,12 @@ from core.chatbot_chromadb import (
 )
 
 # Configuração da API Gemini
-GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "AIzaSyDjejxDFqTSg_i-KDnS2QqsXdiWLydIrSk")
+# Tenta pegar do secrets, se não existir usa a key padrão
+try:
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+except:
+    GEMINI_API_KEY = "AIzaSyDjejxDFqTSg_i-KDnS2QqsXdiWLydIrSk"
+
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Inicialização do estado da sessão
