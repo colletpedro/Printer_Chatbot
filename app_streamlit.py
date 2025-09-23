@@ -166,21 +166,41 @@ def filter_printers_by_features(answers):
     """Filtra impressoras baseado nas respostas do usuário"""
     available = []
     
-    # Mapeia características para modelos
-    printer_features = {
-        'ImoressoraL805': {'a3': False, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L800'},
-        'impressoraL1300': {'a3': True, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L1000'},
-        'impressoraL375': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L300'},
-        'impressoraL3110': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L3000'},
-        'impressoraL3150': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L3000'},
-        'impressoraL3250_L3251': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': True, 'series': 'L3000'},
-        'impressoraL4150': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True, 'series': 'L4000'},
-        'impressoraL4260': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True, 'series': 'L4000'},
-        'impressoral5190': {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True, 'series': 'L5000'},
-        'ImpressoraL5290': {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True, 'series': 'L5000'},
-        'impressoral6490': {'a3': True, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True, 'series': 'L6000'},
-        'Impressoral396': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L300'},
-    }
+    # Mapeia características para modelos baseado nos metadados disponíveis
+    printer_features = {}
+    
+    print(f"DEBUG: Modelos disponíveis no sistema: {st.session_state.available_models}")
+    
+    # Usa os modelos disponíveis do sistema e suas características conhecidas
+    for model_id in st.session_state.available_models:
+        # Características conhecidas dos modelos
+        if 'L805' in model_id or 'l805' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False}
+        elif 'L1300' in model_id or 'l1300' in model_id:
+            printer_features[model_id] = {'a3': True, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False}
+        elif 'L375' in model_id or 'l375' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False}
+        elif 'L396' in model_id or 'l396' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False}
+        elif 'L3110' in model_id or 'l3110' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False}
+        elif 'L3150' in model_id or 'l3150' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False}
+        elif ('L3250' in model_id or 'l3250' in model_id) or ('L3251' in model_id or 'l3251' in model_id):
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': True}
+        elif 'L4150' in model_id or 'l4150' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True}
+        elif 'L4260' in model_id or 'l4260' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True}
+        elif 'L5190' in model_id or 'l5190' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True}
+        elif 'L5290' in model_id or 'l5290' in model_id:
+            printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True}
+        elif 'L6490' in model_id or 'l6490' in model_id:
+            printer_features[model_id] = {'a3': True, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True}
+    
+    print(f"DEBUG: Features mapeadas: {printer_features}")
+    print(f"DEBUG: Respostas do usuário para filtrar: {answers}")
     
     # Filtra baseado nas respostas
     for model_id, features in printer_features.items():
@@ -279,11 +299,17 @@ def process_funnel_answer(answer, key):
         st.session_state.funnel_answers[key] = False
     # Se "Não sei", não adiciona ao filtro
     
+    # Debug: mostra respostas coletadas
+    print(f"DEBUG: Resposta processada - {key}: {st.session_state.funnel_answers.get(key, 'Não sei')}")
+    print(f"DEBUG: Todas respostas até agora: {st.session_state.funnel_answers}")
+    
     # Avança para próximo estágio
     st.session_state.funnel_stage += 1
+    print(f"DEBUG: Avançando para estágio {st.session_state.funnel_stage}")
     
     # Verifica se já pode identificar a impressora
     filtered = filter_printers_by_features(st.session_state.funnel_answers)
+    print(f"DEBUG: Modelos filtrados: {filtered} (Total: {len(filtered)})")
     
     if len(filtered) == 1:
         # Encontrou única impressora
@@ -296,12 +322,24 @@ def process_funnel_answer(answer, key):
         st.session_state.funnel_active = False
         st.session_state.funnel_stage = None
         return False, None
-    elif st.session_state.funnel_stage > 6:
-        # Máximo de perguntas atingido
-        if len(filtered) <= 3:
+    elif st.session_state.funnel_stage > 5 or get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers) is None:
+        # Máximo de perguntas atingido ou não há mais perguntas
+        if len(filtered) <= 3 and len(filtered) > 0:
             # Mostra opções restantes
-            return None, filtered
+            if len(filtered) == 2:
+                # Se são exatamente 2 modelos, mostra ambos para escolha
+                return None, filtered
+            else:
+                # Se são 3 modelos, também mostra para escolha
+                return None, filtered
+        elif len(filtered) == 1:
+            # Encontrou única impressora após todas perguntas
+            st.session_state.selected_printer = filtered[0]
+            st.session_state.funnel_active = False
+            st.session_state.funnel_stage = None
+            return True, filtered[0]
         else:
+            # Nenhuma impressora ou muitas opções
             st.session_state.funnel_active = False
             st.session_state.funnel_stage = None
             return False, None
