@@ -336,6 +336,13 @@ def main():
         # Seleção de impressora
         st.subheader("🖨️ Impressora")
         
+        # Se há impressora identificada pelo afunilamento
+        if st.session_state.selected_printer and not st.session_state.funnel_active:
+            current_printer_name = PRINTER_METADATA.get(
+                st.session_state.selected_printer, {}
+            ).get('full_name', st.session_state.selected_printer)
+            st.success(f"📌 Identificada: **{current_printer_name}**")
+        
         # Lista de modelos para seleção
         model_options = ["Detectar automaticamente"] + [
             PRINTER_METADATA.get(m, {}).get('full_name', m) 
@@ -343,9 +350,17 @@ def main():
             if m in PRINTER_METADATA
         ]
         
+        # Define o índice padrão baseado na impressora selecionada
+        default_index = 0
+        if st.session_state.selected_printer:
+            printer_name = PRINTER_METADATA.get(st.session_state.selected_printer, {}).get('full_name')
+            if printer_name in model_options:
+                default_index = model_options.index(printer_name)
+        
         selected = st.selectbox(
             "Selecione o modelo:",
             options=model_options,
+            index=default_index,
             help="Escolha sua impressora ou deixe o sistema detectar"
         )
         
@@ -353,6 +368,19 @@ def main():
             # Encontra o ID do modelo baseado no nome completo
             for model_id, metadata in PRINTER_METADATA.items():
                 if metadata.get('full_name') == selected:
+                    # Se mudou de modelo, limpa afunilamento
+                    if st.session_state.selected_printer != model_id:
+                        st.session_state.funnel_active = False
+                        st.session_state.funnel_stage = None
+                        st.session_state.funnel_answers = {}
+                        
+                        # Se tinha uma pergunta pendente e selecionou modelo, processa
+                        if st.session_state.pending_question and st.session_state.selected_printer is None:
+                            st.session_state.messages.append({
+                                "role": "assistant",
+                                "content": f"✅ **Modelo selecionado: {selected}**\n\nVou responder sua pergunta agora!"
+                            })
+                    
                     st.session_state.selected_printer = model_id
                     break
         else:
@@ -464,6 +492,11 @@ Posso ajudar com:
         if question_data:
             # Mostra pergunta do afunilamento
             with st.chat_message("assistant"):
+                # Mostra progresso
+                if st.session_state.funnel_stage > 1:
+                    progress = f"📊 Pergunta {st.session_state.funnel_stage} de no máximo 5\n\n"
+                    st.markdown(progress)
+                
                 st.markdown(question_data['question'])
                 
                 # Botões de resposta
@@ -487,32 +520,72 @@ Posso ajudar com:
                             if result is True:
                                 # Impressora identificada
                                 printer_name = PRINTER_METADATA.get(data, {}).get('full_name', data)
-                                st.success(f"✅ Impressora identificada: **{printer_name}**")
                                 
-                                # Processa pergunta pendente
+                                # Adiciona mensagem de identificação ao histórico
+                                success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!"
+                                st.session_state.messages.append({
+                                    "role": "assistant",
+                                    "content": success_msg
+                                })
+                                
+                                # Marca impressora como selecionada
+                                st.session_state.selected_printer = data
+                                
+                                # Se há pergunta pendente, adiciona ao histórico para processar
                                 if st.session_state.pending_question:
-                                    response, source = process_user_query(
-                                        st.session_state.pending_question,
-                                        data,
-                                        st.session_state.response_mode
-                                    )
-                                    if response:
-                                        mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
-                                        header = f"{mode_emoji} **[{printer_name}]**\n\n"
-                                        st.session_state.messages.append({
-                                            "role": "assistant",
-                                            "content": header + response,
-                                            "source": source
-                                        })
-                                    st.session_state.pending_question = None
+                                    # Adiciona a pergunta pendente como se fosse nova
+                                    st.session_state.messages.append({
+                                        "role": "user",
+                                        "content": f"[Pergunta original] {st.session_state.pending_question}"
+                                    })
+                                    
+                                    # Processa a pergunta
+                                    with st.spinner('🤖 Processando sua pergunta...'):
+                                        response, source = process_user_query(
+                                            st.session_state.pending_question,
+                                            data,
+                                            st.session_state.response_mode
+                                        )
+                                        
+                                        if response:
+                                            mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                                            header = f"{mode_emoji} **[{printer_name}]**\n\n"
+                                            st.session_state.messages.append({
+                                                "role": "assistant",
+                                                "content": header + response,
+                                                "source": source
+                                            })
+                                            st.session_state.question_count += 1
+                                
+                                # Limpa estado do afunilamento
+                                st.session_state.funnel_active = False
+                                st.session_state.funnel_stage = None
+                                st.session_state.funnel_answers = {}
+                                st.session_state.pending_question = None
+                                
                                 st.rerun()
                             elif result is False:
                                 st.error("❌ Não foi possível identificar uma impressora com essas características.")
                                 st.session_state.pending_question = None
                                 st.rerun()
                             elif result is None and data:
-                                # Múltiplas opções
-                                st.info(f"🔍 Possíveis modelos: {', '.join([PRINTER_METADATA.get(m, {}).get('full_name', m) for m in data])}")
+                                # Múltiplas opções - permite escolha
+                                st.session_state.messages.append({
+                                    "role": "assistant",
+                                    "content": f"🔍 **Encontrei {len(data)} modelos possíveis com essas características:**"
+                                })
+                                
+                                # Limpa afunilamento e mostra opções para escolha manual
+                                st.session_state.funnel_active = False
+                                st.session_state.funnel_stage = None
+                                
+                                # Adiciona mensagem com modelos possíveis
+                                models_list = "\n".join([f"• {PRINTER_METADATA.get(m, {}).get('full_name', m)}" for m in data])
+                                st.session_state.messages.append({
+                                    "role": "assistant",
+                                    "content": f"{models_list}\n\n**Por favor, selecione o modelo na barra lateral ou digite o modelo específico.**"
+                                })
+                                
                                 st.rerun()
                             else:
                                 st.rerun()
