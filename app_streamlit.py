@@ -36,7 +36,8 @@ from core.chatbot_chromadb import (
     check_and_reload_manual,
     PRINTER_METADATA,
     normalize_text,
-    find_similar_printers
+    find_similar_printers,
+    check_printer_context
 )
 
 # Configuração da API Gemini
@@ -635,6 +636,31 @@ Posso ajudar com:
                 st.warning(rate_msg)
             st.stop()
         
+        # Verifica se a pergunta é sobre impressoras
+        is_printer_related = check_printer_context(prompt)
+        
+        if not is_printer_related:
+            # Pergunta fora do contexto - resposta educada
+            with st.chat_message("assistant"):
+                out_of_context_msg = """🤔 **Desculpe, não posso ajudar com esse assunto.**
+
+Sou um assistente especializado em **impressoras Epson**. Posso ajudar com:
+- 🖨️ Problemas técnicos e soluções
+- 🎨 Qualidade de impressão
+- 📡 Configuração de Wi-Fi e rede
+- 🛠️ Manutenção e limpeza
+- 💧 Troca de tintas e cartuchos
+- 📄 Problemas com papel
+
+**Por favor, faça uma pergunta relacionada a impressoras!**"""
+                st.markdown(out_of_context_msg)
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": out_of_context_msg
+                })
+            st.stop()
+        
+        # Se é relacionado a impressoras, continua o fluxo normal
         # Detecta ou usa impressora selecionada
         printer_model = st.session_state.selected_printer
         

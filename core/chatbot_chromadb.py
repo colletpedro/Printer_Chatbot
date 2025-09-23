@@ -1074,6 +1074,69 @@ def smart_printer_detection(query, available_models, max_attempts=3):
     
     return None
 
+def check_printer_context(query):
+    """Verifica se a pergunta é relacionada a impressoras"""
+    try:
+        # Prepara o prompt para verificar contexto
+        context = """Você é um assistente especializado em identificar se perguntas são relacionadas a impressoras ou não.
+
+ANALISE A SEGUINTE PERGUNTA e responda APENAS com "SIM" ou "NÃO":
+- Responda "SIM" se a pergunta é sobre:
+  • Impressoras (qualquer marca ou modelo)
+  • Problemas de impressão
+  • Configuração de impressoras
+  • Tintas, cartuchos, papel ou suprimentos
+  • Qualidade de impressão
+  • Conexão de impressoras (USB, Wi-Fi, rede)
+  • Drivers ou software de impressora
+  • Manutenção de impressoras
+  • Erros de impressão
+  • Scanner, cópia ou funções relacionadas a multifuncionais
+
+- Responda "NÃO" se a pergunta é sobre:
+  • Assuntos gerais não relacionados a impressoras
+  • Outros dispositivos eletrônicos (computadores, celulares, etc)
+  • Software não relacionado a impressão
+  • Questões pessoais ou conversas gerais
+  • Matemática, ciência, história, etc.
+  • Programação (exceto se for sobre drivers de impressora)
+
+PERGUNTA: """
+
+        # Chama a API para verificar contexto
+        prompt = f"{context}\"{query}\"\n\nResposta (apenas SIM ou NÃO):"
+        
+        # Rate limiting
+        global last_request_time
+        current_time = time.time()
+        if current_time - last_request_time < MIN_REQUEST_INTERVAL:
+            time.sleep(MIN_REQUEST_INTERVAL - (current_time - last_request_time))
+        
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.1,
+                top_p=0.9,
+                max_output_tokens=10
+            )
+        )
+        
+        # Atualiza tempo da última requisição
+        last_request_time = time.time()
+        
+        # Verifica a resposta
+        if response and response.text:
+            result = response.text.strip().upper()
+            return "SIM" in result
+        
+        # Se não conseguir determinar, assume que é sobre impressoras para evitar falsos negativos
+        return True
+        
+    except Exception as e:
+        print(f"Erro ao verificar contexto: {e}")
+        # Em caso de erro, assume que é sobre impressoras para não bloquear o usuário
+        return True
+
 def call_api_detailed(query, manual_sections, mode='detalhado', printer_model=None):
     """Chama API do Gemini com contexto dos manuais"""
     global last_request_time, request_times
