@@ -65,6 +65,14 @@ if 'last_update_check' not in st.session_state:
     st.session_state.last_update_check = datetime.now()
 if 'question_count' not in st.session_state:
     st.session_state.question_count = 0
+if 'funnel_active' not in st.session_state:
+    st.session_state.funnel_active = False
+if 'funnel_stage' not in st.session_state:
+    st.session_state.funnel_stage = None
+if 'funnel_answers' not in st.session_state:
+    st.session_state.funnel_answers = {}
+if 'pending_question' not in st.session_state:
+    st.session_state.pending_question = None
 
 def init_system():
     """Inicializa o sistema ChromaDB"""
@@ -154,6 +162,152 @@ def process_user_query(query, printer_model, mode='detalhado'):
     except Exception as e:
         return None, f"Erro ao processar pergunta: {e}"
 
+def filter_printers_by_features(answers):
+    """Filtra impressoras baseado nas respostas do usuário"""
+    available = []
+    
+    # Mapeia características para modelos
+    printer_features = {
+        'ImoressoraL805': {'a3': False, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L800'},
+        'impressoraL1300': {'a3': True, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L1000'},
+        'impressoraL375': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L300'},
+        'impressoraL3110': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L3000'},
+        'impressoraL3150': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L3000'},
+        'impressoraL3250_L3251': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': True, 'series': 'L3000'},
+        'impressoraL4150': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True, 'series': 'L4000'},
+        'impressoraL4260': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True, 'series': 'L4000'},
+        'impressoral5190': {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True, 'series': 'L5000'},
+        'ImpressoraL5290': {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True, 'series': 'L5000'},
+        'impressoral6490': {'a3': True, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True, 'series': 'L6000'},
+        'Impressoral396': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False, 'series': 'L300'},
+    }
+    
+    # Filtra baseado nas respostas
+    for model_id, features in printer_features.items():
+        match = True
+        
+        # Verifica cada resposta
+        if 'multifuncional' in answers:
+            if answers['multifuncional'] != features['multifuncional']:
+                match = False
+        
+        if 'a3' in answers:
+            if answers['a3'] != features['a3']:
+                match = False
+        
+        if 'duplex' in answers:
+            if answers['duplex'] != features['duplex']:
+                match = False
+        
+        if 'adf' in answers:
+            if answers['adf'] != features['adf']:
+                match = False
+        
+        if 'fax' in answers:
+            if answers['fax'] != features['fax']:
+                match = False
+        
+        if match:
+            available.append(model_id)
+    
+    return available
+
+def get_funnel_question(stage, answers):
+    """Retorna a próxima pergunta do afunilamento baseado no estágio"""
+    
+    if stage == 1:
+        return {
+            'question': "🖨️ **Sua impressora é multifuncional?**\n\n(Multifuncional = imprime, copia e digitaliza)",
+            'options': ['Sim, é multifuncional', 'Não, só imprime', 'Não sei'],
+            'key': 'multifuncional'
+        }
+    
+    # Se não é multifuncional, pula direto para A3
+    if stage == 2 and answers.get('multifuncional') == False:
+        return {
+            'question': "📄 **Sua impressora suporta papel A3?**\n\n(A3 = folha grande, 420mm × 297mm)",
+            'options': ['Sim, imprime A3', 'Não, apenas A4', 'Não sei'],
+            'key': 'a3'
+        }
+    
+    # Se é multifuncional, pergunta sobre duplex
+    if stage == 2 and answers.get('multifuncional') == True:
+        return {
+            'question': "📑 **Sua impressora imprime frente e verso automaticamente (duplex)?**",
+            'options': ['Sim, tem duplex', 'Não, apenas um lado', 'Não sei'],
+            'key': 'duplex'
+        }
+    
+    # Pergunta sobre ADF (para multifuncionais)
+    if stage == 3 and answers.get('multifuncional') == True:
+        return {
+            'question': "📋 **Sua impressora tem alimentador automático de documentos (ADF)?**\n\n(ADF = bandeja na parte superior para digitalizar várias folhas)",
+            'options': ['Sim, tem ADF', 'Não, só vidro do scanner', 'Não sei'],
+            'key': 'adf'
+        }
+    
+    # Pergunta sobre FAX (para multifuncionais com ADF)
+    if stage == 4 and answers.get('multifuncional') == True and answers.get('adf') == True:
+        return {
+            'question': "📠 **Sua impressora tem função de FAX?**",
+            'options': ['Sim, tem FAX', 'Não tem FAX', 'Não sei'],
+            'key': 'fax'
+        }
+    
+    # Pergunta sobre A3 (para multifuncionais)
+    if (stage == 5 or (stage == 4 and answers.get('adf') != True)) and answers.get('multifuncional') == True:
+        return {
+            'question': "📄 **Sua impressora suporta papel A3?**\n\n(A3 = folha grande, 420mm × 297mm)",
+            'options': ['Sim, imprime A3', 'Não, apenas A4', 'Não sei'],
+            'key': 'a3'
+        }
+    
+    return None
+
+def start_funnel():
+    """Inicia o processo de afunilamento"""
+    st.session_state.funnel_active = True
+    st.session_state.funnel_stage = 1
+    st.session_state.funnel_answers = {}
+
+def process_funnel_answer(answer, key):
+    """Processa a resposta do afunilamento"""
+    # Mapeia resposta para booleano
+    if "Sim" in answer:
+        st.session_state.funnel_answers[key] = True
+    elif "Não" in answer and "Não sei" not in answer:
+        st.session_state.funnel_answers[key] = False
+    # Se "Não sei", não adiciona ao filtro
+    
+    # Avança para próximo estágio
+    st.session_state.funnel_stage += 1
+    
+    # Verifica se já pode identificar a impressora
+    filtered = filter_printers_by_features(st.session_state.funnel_answers)
+    
+    if len(filtered) == 1:
+        # Encontrou única impressora
+        st.session_state.selected_printer = filtered[0]
+        st.session_state.funnel_active = False
+        st.session_state.funnel_stage = None
+        return True, filtered[0]
+    elif len(filtered) == 0:
+        # Nenhuma impressora corresponde
+        st.session_state.funnel_active = False
+        st.session_state.funnel_stage = None
+        return False, None
+    elif st.session_state.funnel_stage > 6:
+        # Máximo de perguntas atingido
+        if len(filtered) <= 3:
+            # Mostra opções restantes
+            return None, filtered
+        else:
+            st.session_state.funnel_active = False
+            st.session_state.funnel_stage = None
+            return False, None
+    
+    return None, None
+
 # Interface principal
 def main():
     # Inicializa o sistema
@@ -235,6 +389,20 @@ def main():
             if st.button("🗑️ Limpar Chat", use_container_width=True):
                 st.session_state.messages = []
                 st.session_state.question_count = 0
+                st.session_state.funnel_active = False
+                st.session_state.funnel_stage = None
+                st.session_state.funnel_answers = {}
+                st.session_state.pending_question = None
+                st.rerun()
+        
+        # Botão para cancelar afunilamento
+        if st.session_state.funnel_active:
+            st.markdown("---")
+            if st.button("❌ Cancelar Identificação", use_container_width=True, type="secondary"):
+                st.session_state.funnel_active = False
+                st.session_state.funnel_stage = None
+                st.session_state.funnel_answers = {}
+                st.session_state.pending_question = None
                 st.rerun()
         
         st.markdown("---")
@@ -289,6 +457,70 @@ Posso ajudar com:
             if message.get("source"):
                 st.caption(message["source"])
     
+    # Sistema de afunilamento ativo
+    if st.session_state.funnel_active:
+        question_data = get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers)
+        
+        if question_data:
+            # Mostra pergunta do afunilamento
+            with st.chat_message("assistant"):
+                st.markdown(question_data['question'])
+                
+                # Botões de resposta
+                cols = st.columns(len(question_data['options']))
+                for i, option in enumerate(question_data['options']):
+                    with cols[i]:
+                        if st.button(option, key=f"funnel_btn_{st.session_state.funnel_stage}_{i}", use_container_width=True):
+                            # Processa resposta
+                            result, data = process_funnel_answer(option, question_data['key'])
+                            
+                            # Adiciona ao histórico
+                            st.session_state.messages.append({
+                                "role": "user", 
+                                "content": option
+                            })
+                            st.session_state.messages.append({
+                                "role": "assistant",
+                                "content": question_data['question']
+                            })
+                            
+                            if result is True:
+                                # Impressora identificada
+                                printer_name = PRINTER_METADATA.get(data, {}).get('full_name', data)
+                                st.success(f"✅ Impressora identificada: **{printer_name}**")
+                                
+                                # Processa pergunta pendente
+                                if st.session_state.pending_question:
+                                    response, source = process_user_query(
+                                        st.session_state.pending_question,
+                                        data,
+                                        st.session_state.response_mode
+                                    )
+                                    if response:
+                                        mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                                        header = f"{mode_emoji} **[{printer_name}]**\n\n"
+                                        st.session_state.messages.append({
+                                            "role": "assistant",
+                                            "content": header + response,
+                                            "source": source
+                                        })
+                                    st.session_state.pending_question = None
+                                st.rerun()
+                            elif result is False:
+                                st.error("❌ Não foi possível identificar uma impressora com essas características.")
+                                st.session_state.pending_question = None
+                                st.rerun()
+                            elif result is None and data:
+                                # Múltiplas opções
+                                st.info(f"🔍 Possíveis modelos: {', '.join([PRINTER_METADATA.get(m, {}).get('full_name', m) for m in data])}")
+                                st.rerun()
+                            else:
+                                st.rerun()
+        else:
+            # Fim do afunilamento sem resultado
+            st.session_state.funnel_active = False
+            st.session_state.funnel_stage = None
+    
     # Input do usuário
     if prompt := st.chat_input("Digite sua pergunta sobre impressoras Epson..."):
         # Adiciona mensagem do usuário
@@ -315,55 +547,51 @@ Posso ajudar com:
                 with st.chat_message("assistant"):
                     st.info(f"🔍 Impressora detectada: **{printer_name}**")
             else:
-                # Solicita ao usuário especificar o modelo
-                with st.chat_message("assistant"):
-                    st.warning("""⚠️ **Modelo de impressora não identificado**
+                # Inicia processo de afunilamento
+                st.session_state.pending_question = prompt
+                start_funnel()
+                st.rerun()
+        
+        # Se chegou aqui, tem modelo de impressora
+        if printer_model:
+            # Nome da impressora para exibição
+            printer_name = PRINTER_METADATA.get(printer_model, {}).get('full_name', printer_model)
+            
+            # Processa a pergunta
+            response, source = process_user_query(
+                prompt, 
+                printer_model,
+                st.session_state.response_mode
+            )
+            
+            # Exibe resposta
+            with st.chat_message("assistant"):
+                if response:
+                    # Adiciona indicador do modelo e modo
+                    mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                    header = f"{mode_emoji} **[{printer_name}]**\n\n"
+                    st.markdown(header + response)
                     
-Por favor:
-1. Selecione o modelo na barra lateral, ou
-2. Inclua o modelo na sua pergunta (ex: "Como trocar tinta da L3150?")
-
-Modelos disponíveis: L3110, L3150, L3250, L375, L4150, L4260, L5190, L6490, L1300, etc.""")
-                st.stop()
-        
-        # Nome da impressora para exibição
-        printer_name = PRINTER_METADATA.get(printer_model, {}).get('full_name', printer_model)
-        
-        # Processa a pergunta
-        response, source = process_user_query(
-            prompt, 
-            printer_model,
-            st.session_state.response_mode
-        )
-        
-        # Exibe resposta
-        with st.chat_message("assistant"):
-            if response:
-                # Adiciona indicador do modelo e modo
-                mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
-                header = f"{mode_emoji} **[{printer_name}]**\n\n"
-                st.markdown(header + response)
-                
-                # Exibe fonte
-                if source:
-                    st.caption(source)
-                
-                # Salva no histórico
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": header + response,
-                    "source": source
-                })
-                
-                # Incrementa contador
-                st.session_state.question_count += 1
-                
-            else:
-                # Erro ou sem resultados
-                st.error(source or "Não foi possível gerar uma resposta.")
-                
-                # Dicas
-                st.info("""💡 **Dicas:**
+                    # Exibe fonte
+                    if source:
+                        st.caption(source)
+                    
+                    # Salva no histórico
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": header + response,
+                        "source": source
+                    })
+                    
+                    # Incrementa contador
+                    st.session_state.question_count += 1
+                    
+                else:
+                    # Erro ou sem resultados
+                    st.error(source or "Não foi possível gerar uma resposta.")
+                    
+                    # Dicas
+                    st.info("""💡 **Dicas:**
 • Tente reformular sua pergunta
 • Use termos mais específicos
 • Verifique se o modelo da impressora está correto""")
