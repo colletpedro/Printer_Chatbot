@@ -169,8 +169,6 @@ def filter_printers_by_features(answers):
     # Mapeia características para modelos baseado nos metadados disponíveis
     printer_features = {}
     
-    print(f"DEBUG: Modelos disponíveis no sistema: {st.session_state.available_models}")
-    
     # Usa os modelos disponíveis do sistema e suas características conhecidas
     for model_id in st.session_state.available_models:
         # Características conhecidas dos modelos
@@ -198,9 +196,6 @@ def filter_printers_by_features(answers):
             printer_features[model_id] = {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True}
         elif 'L6490' in model_id or 'l6490' in model_id:
             printer_features[model_id] = {'a3': True, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True}
-    
-    print(f"DEBUG: Features mapeadas: {printer_features}")
-    print(f"DEBUG: Respostas do usuário para filtrar: {answers}")
     
     # Filtra baseado nas respostas
     for model_id, features in printer_features.items():
@@ -299,17 +294,11 @@ def process_funnel_answer(answer, key):
         st.session_state.funnel_answers[key] = False
     # Se "Não sei", não adiciona ao filtro
     
-    # Debug: mostra respostas coletadas
-    print(f"DEBUG: Resposta processada - {key}: {st.session_state.funnel_answers.get(key, 'Não sei')}")
-    print(f"DEBUG: Todas respostas até agora: {st.session_state.funnel_answers}")
-    
     # Avança para próximo estágio
     st.session_state.funnel_stage += 1
-    print(f"DEBUG: Avançando para estágio {st.session_state.funnel_stage}")
     
     # Verifica se já pode identificar a impressora
     filtered = filter_printers_by_features(st.session_state.funnel_answers)
-    print(f"DEBUG: Modelos filtrados: {filtered} (Total: {len(filtered)})")
     
     if len(filtered) == 1:
         # Encontrou única impressora
