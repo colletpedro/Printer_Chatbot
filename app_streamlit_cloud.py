@@ -389,16 +389,19 @@ Posso ajudar com:
                             # Processa resposta
                             result, data = process_funnel_answer(option, question_data['key'])
                             
-                            # Adiciona ao histórico
+                            # Adiciona pergunta e resposta ao histórico
+                            if not any(msg['content'] == question_data['question'] for msg in st.session_state.messages[-2:] if msg['role'] == 'assistant'):
+                                st.session_state.messages.append({
+                                    "role": "assistant",
+                                    "content": question_data['question']
+                                })
+                            
                             st.session_state.messages.append({
                                 "role": "user", 
                                 "content": option
                             })
                             
                             if result is True:
-                                # Debug - para verificar se chegou aqui
-                                st.write(f"DEBUG: result={result}, data={data}")
-                                
                                 # Impressora identificada - marca como selecionada automaticamente
                                 st.session_state.selected_printer = data
                                 st.session_state.auto_selected = True
