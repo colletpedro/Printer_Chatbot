@@ -62,6 +62,8 @@ if 'funnel_answers' not in st.session_state:
     st.session_state.funnel_answers = {}
 if 'pending_question' not in st.session_state:
     st.session_state.pending_question = None
+if 'auto_selected' not in st.session_state:
+    st.session_state.auto_selected = False
 
 def check_printer_context(query):
     """Verifica se a pergunta é sobre impressoras"""
@@ -297,16 +299,31 @@ def main():
         st.subheader("🖨️ Impressora")
         
         printer_options = ['Detecção Automática'] + list(PRINTER_METADATA.keys())
+        
+        # Calcula o índice baseado na impressora selecionada
+        current_index = 0
+        if st.session_state.selected_printer:
+            try:
+                current_index = printer_options.index(st.session_state.selected_printer)
+            except ValueError:
+                current_index = 0
+        
         selected = st.selectbox(
             "Selecione o modelo:",
             options=printer_options,
-            index=0
+            index=current_index,
+            key="printer_selector"
         )
         
         if selected != 'Detecção Automática':
             st.session_state.selected_printer = selected
         else:
-            st.session_state.selected_printer = None
+            # Só limpa se o usuário explicitamente selecionou "Detecção Automática"
+            # e não foi uma seleção automática do sistema
+            if st.session_state.get('auto_selected', False):
+                st.session_state.auto_selected = False
+            else:
+                st.session_state.selected_printer = None
         
         # Modo de resposta
         st.subheader("💬 Modo de Resposta")
@@ -378,9 +395,12 @@ Posso ajudar com:
                             })
                             
                             if result is True:
-                                # Impressora identificada
+                                # Impressora identificada - marca como selecionada automaticamente
+                                st.session_state.selected_printer = data
+                                st.session_state.auto_selected = True
+                                
                                 printer_name = PRINTER_METADATA.get(data, data)
-                                success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!"
+                                success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!\n\n💡 *Impressora {printer_name} selecionada automaticamente na barra lateral*"
                                 st.session_state.messages.append({
                                     "role": "assistant",
                                     "content": success_msg
@@ -421,15 +441,23 @@ Posso ajudar com:
                                 with st.chat_message("assistant"):
                                     st.markdown("🔍 **Encontrei algumas opções. Qual é a sua impressora?**")
                                     for model in data:
-                                        model_name = PRINTER_METADATA.get(model, model)
-                                        if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
-                                            st.session_state.selected_printer = model
-                                            st.session_state.funnel_active = False
-                                            st.session_state.funnel_stage = None
-                                            st.session_state.funnel_answers = {}
-                                            
-                                            # Processa pergunta pendente
-                                            if st.session_state.pending_question:
+                                    model_name = PRINTER_METADATA.get(model, model)
+                                    if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
+                                        # Marca impressora como selecionada automaticamente
+                                        st.session_state.selected_printer = model
+                                        st.session_state.auto_selected = True
+                                        st.session_state.funnel_active = False
+                                        st.session_state.funnel_stage = None
+                                        st.session_state.funnel_answers = {}
+                                        
+                                        # Adiciona mensagem informando a seleção
+                                        st.session_state.messages.append({
+                                            "role": "assistant",
+                                            "content": f"✅ **{model_name} selecionada!**\n\n💡 *Impressora configurada na barra lateral*"
+                                        })
+                                        
+                                        # Processa pergunta pendente
+                                        if st.session_state.pending_question:
                                                 with st.spinner('🤖 Processando...'):
                                                     response, source = process_query_simple(
                                                         st.session_state.pending_question,
@@ -493,8 +521,11 @@ Sou especializado em **impressoras Epson**. Posso ajudar com:
             detected = detect_printer_from_query(prompt)
             if detected:
                 printer_model = detected
+                # Marca como selecionada automaticamente
+                st.session_state.selected_printer = detected
+                st.session_state.auto_selected = True
                 with st.chat_message("assistant"):
-                    st.info(f"🔍 Detectado: **{PRINTER_METADATA.get(detected, detected)}**")
+                    st.info(f"🔍 Detectado: **{PRINTER_METADATA.get(detected, detected)}**\n\n💡 *Impressora selecionada automaticamente na barra lateral*")
             else:
                 # Inicia processo de afunilamento
                 st.session_state.pending_question = prompt
