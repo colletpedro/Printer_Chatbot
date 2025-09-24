@@ -54,6 +54,14 @@ if 'selected_printer' not in st.session_state:
     st.session_state.selected_printer = None
 if 'response_mode' not in st.session_state:
     st.session_state.response_mode = 'detalhado'
+if 'funnel_active' not in st.session_state:
+    st.session_state.funnel_active = False
+if 'funnel_stage' not in st.session_state:
+    st.session_state.funnel_stage = None
+if 'funnel_answers' not in st.session_state:
+    st.session_state.funnel_answers = {}
+if 'pending_question' not in st.session_state:
+    st.session_state.pending_question = None
 
 def check_printer_context(query):
     """Verifica se a pergunta é sobre impressoras"""
@@ -97,6 +105,135 @@ def detect_printer_from_query(query):
                 return model_key
     
     return None
+
+def filter_printers_by_features(answers):
+    """Filtra impressoras baseado nas respostas do usuário"""
+    available = []
+    
+    # Define características conhecidas dos modelos
+    printer_features = {
+        'L805': {'a3': False, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False},
+        'L1300': {'a3': True, 'multifuncional': False, 'fax': False, 'adf': False, 'duplex': False},
+        'L375': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False},
+        'L396': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False},
+        'L3110': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False},
+        'L3150': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': False},
+        'L3250': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': False, 'duplex': True},
+        'L4150': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True},
+        'L4260': {'a3': False, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True},
+        'L5190': {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True},
+        'L5290': {'a3': False, 'multifuncional': True, 'fax': True, 'adf': True, 'duplex': True},
+        'L6490': {'a3': True, 'multifuncional': True, 'fax': False, 'adf': True, 'duplex': True}
+    }
+    
+    # Filtra baseado nas respostas
+    for model_id, features in printer_features.items():
+        match = True
+        
+        for key, value in answers.items():
+            if key in features and features[key] != value:
+                match = False
+                break
+        
+        if match:
+            available.append(model_id)
+    
+    return available
+
+def get_funnel_question(stage, answers):
+    """Retorna a próxima pergunta do afunilamento"""
+    
+    if stage == 1:
+        return {
+            'question': "🖨️ **Sua impressora é multifuncional?**\n\n(Multifuncional = imprime, copia e digitaliza)",
+            'options': ['Sim, é multifuncional', 'Não, só imprime', 'Não sei'],
+            'key': 'multifuncional'
+        }
+    
+    # Se não é multifuncional, pula direto para A3
+    if stage == 2 and answers.get('multifuncional') == False:
+        return {
+            'question': "📄 **Sua impressora suporta papel A3?**\n\n(A3 = folha grande, 420mm × 297mm)",
+            'options': ['Sim, imprime A3', 'Não, apenas A4', 'Não sei'],
+            'key': 'a3'
+        }
+    
+    # Se é multifuncional, pergunta sobre duplex
+    if stage == 2 and answers.get('multifuncional') == True:
+        return {
+            'question': "📑 **Sua impressora imprime frente e verso automaticamente (duplex)?**",
+            'options': ['Sim, tem duplex', 'Não, apenas um lado', 'Não sei'],
+            'key': 'duplex'
+        }
+    
+    # Pergunta sobre ADF
+    if stage == 3 and answers.get('multifuncional') == True:
+        return {
+            'question': "📋 **Sua impressora tem alimentador automático de documentos (ADF)?**\n\n(ADF = bandeja na parte superior para digitalizar várias folhas)",
+            'options': ['Sim, tem ADF', 'Não, só vidro do scanner', 'Não sei'],
+            'key': 'adf'
+        }
+    
+    # Pergunta sobre FAX
+    if stage == 4 and answers.get('multifuncional') == True and answers.get('adf') == True:
+        return {
+            'question': "📠 **Sua impressora tem função de FAX?**",
+            'options': ['Sim, tem FAX', 'Não tem FAX', 'Não sei'],
+            'key': 'fax'
+        }
+    
+    # Pergunta sobre A3
+    if (stage == 5 or (stage == 4 and answers.get('adf') != True)) and answers.get('multifuncional') == True:
+        return {
+            'question': "📄 **Sua impressora suporta papel A3?**\n\n(A3 = folha grande, 420mm × 297mm)",
+            'options': ['Sim, imprime A3', 'Não, apenas A4', 'Não sei'],
+            'key': 'a3'
+        }
+    
+    return None
+
+def start_funnel():
+    """Inicia o processo de afunilamento"""
+    st.session_state.funnel_active = True
+    st.session_state.funnel_stage = 1
+    st.session_state.funnel_answers = {}
+
+def process_funnel_answer(answer, key):
+    """Processa a resposta do afunilamento"""
+    # Mapeia resposta para booleano
+    if "Sim" in answer:
+        st.session_state.funnel_answers[key] = True
+    elif "Não" in answer and "Não sei" not in answer:
+        st.session_state.funnel_answers[key] = False
+    # Se "Não sei", não adiciona ao filtro
+    
+    # Avança para próximo estágio
+    st.session_state.funnel_stage += 1
+    
+    # Verifica se já pode identificar a impressora
+    filtered = filter_printers_by_features(st.session_state.funnel_answers)
+    
+    if len(filtered) == 1:
+        # Encontrou única impressora
+        st.session_state.selected_printer = filtered[0]
+        st.session_state.funnel_active = False
+        st.session_state.funnel_stage = None
+        return True, filtered[0]
+    elif len(filtered) == 0:
+        # Nenhuma impressora corresponde
+        st.session_state.funnel_active = False
+        st.session_state.funnel_stage = None
+        return False, None
+    elif st.session_state.funnel_stage > 5 or get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers) is None:
+        # Máximo de perguntas atingido
+        if len(filtered) <= 3 and len(filtered) > 0:
+            return None, filtered
+        else:
+            st.session_state.funnel_active = False
+            st.session_state.funnel_stage = None
+            return False, None
+    
+    return None, None
 
 def process_query_simple(query, printer_model, mode='detalhado'):
     """Processa pergunta usando apenas Gemini (sem ChromaDB)"""
@@ -213,6 +350,115 @@ Posso ajudar com:
             if message.get("source"):
                 st.caption(message["source"])
     
+    # Sistema de afunilamento ativo
+    if st.session_state.funnel_active:
+        question_data = get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers)
+        
+        if question_data:
+            # Mostra pergunta do afunilamento
+            with st.chat_message("assistant"):
+                if st.session_state.funnel_stage > 1:
+                    progress = f"📊 Pergunta {st.session_state.funnel_stage} de no máximo 5\n\n"
+                    st.markdown(progress)
+                
+                st.markdown(question_data['question'])
+                
+                # Botões de resposta
+                cols = st.columns(len(question_data['options']))
+                for i, option in enumerate(question_data['options']):
+                    with cols[i]:
+                        if st.button(option, key=f"funnel_btn_{st.session_state.funnel_stage}_{i}", use_container_width=True):
+                            # Processa resposta
+                            result, data = process_funnel_answer(option, question_data['key'])
+                            
+                            # Adiciona ao histórico
+                            st.session_state.messages.append({
+                                "role": "user", 
+                                "content": option
+                            })
+                            
+                            if result is True:
+                                # Impressora identificada
+                                printer_name = PRINTER_METADATA.get(data, data)
+                                success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!"
+                                st.session_state.messages.append({
+                                    "role": "assistant",
+                                    "content": success_msg
+                                })
+                                
+                                # Se há pergunta pendente, processa
+                                if st.session_state.pending_question:
+                                    with st.spinner('🤖 Processando...'):
+                                        response, source = process_query_simple(
+                                            st.session_state.pending_question,
+                                            data,
+                                            st.session_state.response_mode
+                                        )
+                                        
+                                        if response:
+                                            mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                                            header = f"{mode_emoji} **[{printer_name}]**\n\n"
+                                            st.session_state.messages.append({
+                                                "role": "assistant",
+                                                "content": header + response,
+                                                "source": source
+                                            })
+                                
+                                # Limpa estado do afunilamento
+                                st.session_state.funnel_active = False
+                                st.session_state.funnel_stage = None
+                                st.session_state.funnel_answers = {}
+                                st.session_state.pending_question = None
+                                st.rerun()
+                            
+                            elif result is False:
+                                st.error("❌ Não foi possível identificar uma impressora com essas características.")
+                                st.session_state.pending_question = None
+                                st.rerun()
+                            
+                            elif result is None and data:
+                                # Múltiplas opções - mostra escolha
+                                with st.chat_message("assistant"):
+                                    st.markdown("🔍 **Encontrei algumas opções. Qual é a sua impressora?**")
+                                    for model in data:
+                                        model_name = PRINTER_METADATA.get(model, model)
+                                        if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
+                                            st.session_state.selected_printer = model
+                                            st.session_state.funnel_active = False
+                                            st.session_state.funnel_stage = None
+                                            st.session_state.funnel_answers = {}
+                                            
+                                            # Processa pergunta pendente
+                                            if st.session_state.pending_question:
+                                                with st.spinner('🤖 Processando...'):
+                                                    response, source = process_query_simple(
+                                                        st.session_state.pending_question,
+                                                        model,
+                                                        st.session_state.response_mode
+                                                    )
+                                                    if response:
+                                                        mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                                                        header = f"{mode_emoji} **[{model_name}]**\n\n"
+                                                        st.session_state.messages.append({
+                                                            "role": "assistant",
+                                                            "content": header + response,
+                                                            "source": source
+                                                        })
+                                            st.session_state.pending_question = None
+                                            st.rerun()
+                            else:
+                                st.rerun()
+        
+        # Botão para cancelar afunilamento
+        if st.session_state.funnel_active:
+            st.markdown("---")
+            if st.button("❌ Cancelar Identificação", use_container_width=True, type="secondary"):
+                st.session_state.funnel_active = False
+                st.session_state.funnel_stage = None
+                st.session_state.funnel_answers = {}
+                st.session_state.pending_question = None
+                st.rerun()
+    
     # Input do usuário
     if prompt := st.chat_input("Digite sua pergunta sobre impressoras Epson..."):
         # Adiciona mensagem do usuário
@@ -250,10 +496,10 @@ Sou especializado em **impressoras Epson**. Posso ajudar com:
                 with st.chat_message("assistant"):
                     st.info(f"🔍 Detectado: **{PRINTER_METADATA.get(detected, detected)}**")
             else:
-                # Usa modelo genérico
-                printer_model = "EcoTank"
-                with st.chat_message("assistant"):
-                    st.info("💡 Usando conhecimento geral sobre impressoras Epson")
+                # Inicia processo de afunilamento
+                st.session_state.pending_question = prompt
+                start_funnel()
+                st.rerun()
         
         # Processa pergunta
         with st.spinner('🤖 Processando...'):
