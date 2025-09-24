@@ -300,40 +300,37 @@ def main():
         # Seleção de impressora
         st.subheader("🖨️ Impressora")
         
+        # Mostra status atual ANTES do selectbox
+        if st.session_state.selected_printer:
+            printer_name = PRINTER_METADATA.get(st.session_state.selected_printer, st.session_state.selected_printer)
+            if st.session_state.get('auto_selected', False):
+                st.success(f"✅ **{printer_name}** (selecionada automaticamente)")
+            else:
+                st.info(f"📌 **{printer_name}** (selecionada)")
+        
         printer_options = ['Detecção Automática'] + list(PRINTER_METADATA.keys())
         
-        # Calcula o índice baseado na impressora selecionada
-        current_index = 0
-        if st.session_state.selected_printer and st.session_state.selected_printer in printer_options:
-            current_index = printer_options.index(st.session_state.selected_printer)
+        # Sempre mostra o selectbox com o valor atual
+        selected = st.selectbox(
+            "Alterar modelo:" if st.session_state.selected_printer else "Selecione o modelo:",
+            options=printer_options,
+            index=0 if not st.session_state.selected_printer else printer_options.index(st.session_state.selected_printer) if st.session_state.selected_printer in printer_options else 0,
+            key="printer_selector",
+            help="Selecione manualmente ou deixe em 'Detecção Automática' para identificação inteligente"
+        )
         
-        # Usa o valor do session_state se foi auto-selecionado
-        if st.session_state.get('auto_selected', False) and st.session_state.selected_printer:
-            # Força o selectbox a mostrar o valor selecionado automaticamente
-            selected = st.selectbox(
-                "Selecione o modelo:",
-                options=printer_options,
-                index=current_index,
-                key="printer_selector_" + str(st.session_state.get('selection_counter', 0))  # Key dinâmica para forçar atualização
-            )
-        else:
-            selected = st.selectbox(
-                "Selecione o modelo:",
-                options=printer_options,
-                index=current_index,
-                key="printer_selector"
-            )
-        
-        # Atualiza o session_state baseado na seleção
+        # Processa mudança manual
         if selected != 'Detecção Automática':
-            # Se mudou manualmente, não é mais auto-seleção
             if selected != st.session_state.selected_printer:
+                st.session_state.selected_printer = selected
                 st.session_state.auto_selected = False
-            st.session_state.selected_printer = selected
+                st.rerun()
         else:
-            # Só limpa se foi seleção manual
-            if not st.session_state.get('auto_selected', False):
+            # Se mudou para Detecção Automática manualmente
+            if st.session_state.selected_printer and not st.session_state.get('auto_selected', False):
                 st.session_state.selected_printer = None
+                st.session_state.auto_selected = False
+                st.rerun()
         
         # Modo de resposta
         st.subheader("💬 Modo de Resposta")
@@ -440,6 +437,7 @@ Posso ajudar com:
                                 st.session_state.funnel_stage = None
                                 st.session_state.funnel_answers = {}
                                 st.session_state.pending_question = None
+                                # Força atualização completa
                                 st.rerun()
                             
                             elif result is False:
