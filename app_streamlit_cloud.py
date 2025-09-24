@@ -441,23 +441,23 @@ Posso ajudar com:
                                 with st.chat_message("assistant"):
                                     st.markdown("🔍 **Encontrei algumas opções. Qual é a sua impressora?**")
                                     for model in data:
-                                    model_name = PRINTER_METADATA.get(model, model)
-                                    if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
-                                        # Marca impressora como selecionada automaticamente
-                                        st.session_state.selected_printer = model
-                                        st.session_state.auto_selected = True
-                                        st.session_state.funnel_active = False
-                                        st.session_state.funnel_stage = None
-                                        st.session_state.funnel_answers = {}
-                                        
-                                        # Adiciona mensagem informando a seleção
-                                        st.session_state.messages.append({
-                                            "role": "assistant",
-                                            "content": f"✅ **{model_name} selecionada!**\n\n💡 *Impressora configurada na barra lateral*"
-                                        })
-                                        
-                                        # Processa pergunta pendente
-                                        if st.session_state.pending_question:
+                                        model_name = PRINTER_METADATA.get(model, model)
+                                        if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
+                                            # Marca impressora como selecionada automaticamente
+                                            st.session_state.selected_printer = model
+                                            st.session_state.auto_selected = True
+                                            st.session_state.funnel_active = False
+                                            st.session_state.funnel_stage = None
+                                            st.session_state.funnel_answers = {}
+                                            
+                                            # Adiciona mensagem informando a seleção
+                                            st.session_state.messages.append({
+                                                "role": "assistant",
+                                                "content": f"✅ **{model_name} selecionada!**\n\n💡 *Impressora configurada na barra lateral*"
+                                            })
+                                            
+                                            # Processa pergunta pendente
+                                            if st.session_state.pending_question:
                                                 with st.spinner('🤖 Processando...'):
                                                     response, source = process_query_simple(
                                                         st.session_state.pending_question,
