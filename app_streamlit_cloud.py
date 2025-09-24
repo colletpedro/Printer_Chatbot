@@ -218,23 +218,17 @@ def process_funnel_answer(answer, key):
     filtered = filter_printers_by_features(st.session_state.funnel_answers)
     
     if len(filtered) == 1:
-        # Encontrou única impressora
-        st.session_state.selected_printer = filtered[0]
-        st.session_state.funnel_active = False
-        st.session_state.funnel_stage = None
+        # Encontrou única impressora - NÃO modifica session_state aqui!
+        # Deixa o código principal fazer isso após processar
         return True, filtered[0]
     elif len(filtered) == 0:
         # Nenhuma impressora corresponde
-        st.session_state.funnel_active = False
-        st.session_state.funnel_stage = None
         return False, None
     elif st.session_state.funnel_stage > 5 or get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers) is None:
         # Máximo de perguntas atingido
         if len(filtered) <= 3 and len(filtered) > 0:
             return None, filtered
         else:
-            st.session_state.funnel_active = False
-            st.session_state.funnel_stage = None
             return False, None
     
     return None, None
@@ -402,6 +396,9 @@ Posso ajudar com:
                             })
                             
                             if result is True:
+                                # Debug - para verificar se chegou aqui
+                                st.write(f"DEBUG: result={result}, data={data}")
+                                
                                 # Impressora identificada - marca como selecionada automaticamente
                                 st.session_state.selected_printer = data
                                 st.session_state.auto_selected = True
@@ -442,6 +439,10 @@ Posso ajudar com:
                             
                             elif result is False:
                                 st.error("❌ Não foi possível identificar uma impressora com essas características.")
+                                # Limpa o afunilamento quando não encontra impressora
+                                st.session_state.funnel_active = False
+                                st.session_state.funnel_stage = None
+                                st.session_state.funnel_answers = {}
                                 st.session_state.pending_question = None
                                 st.rerun()
                             
