@@ -64,6 +64,8 @@ if 'pending_question' not in st.session_state:
     st.session_state.pending_question = None
 if 'auto_selected' not in st.session_state:
     st.session_state.auto_selected = False
+if 'selection_counter' not in st.session_state:
+    st.session_state.selection_counter = 0
 
 def check_printer_context(query):
     """Verifica se a pergunta é sobre impressoras"""
@@ -302,27 +304,35 @@ def main():
         
         # Calcula o índice baseado na impressora selecionada
         current_index = 0
-        if st.session_state.selected_printer:
-            try:
-                current_index = printer_options.index(st.session_state.selected_printer)
-            except ValueError:
-                current_index = 0
+        if st.session_state.selected_printer and st.session_state.selected_printer in printer_options:
+            current_index = printer_options.index(st.session_state.selected_printer)
         
-        selected = st.selectbox(
-            "Selecione o modelo:",
-            options=printer_options,
-            index=current_index,
-            key="printer_selector"
-        )
+        # Usa o valor do session_state se foi auto-selecionado
+        if st.session_state.get('auto_selected', False) and st.session_state.selected_printer:
+            # Força o selectbox a mostrar o valor selecionado automaticamente
+            selected = st.selectbox(
+                "Selecione o modelo:",
+                options=printer_options,
+                index=current_index,
+                key="printer_selector_" + str(st.session_state.get('selection_counter', 0))  # Key dinâmica para forçar atualização
+            )
+        else:
+            selected = st.selectbox(
+                "Selecione o modelo:",
+                options=printer_options,
+                index=current_index,
+                key="printer_selector"
+            )
         
+        # Atualiza o session_state baseado na seleção
         if selected != 'Detecção Automática':
+            # Se mudou manualmente, não é mais auto-seleção
+            if selected != st.session_state.selected_printer:
+                st.session_state.auto_selected = False
             st.session_state.selected_printer = selected
         else:
-            # Só limpa se o usuário explicitamente selecionou "Detecção Automática"
-            # e não foi uma seleção automática do sistema
-            if st.session_state.get('auto_selected', False):
-                st.session_state.auto_selected = False
-            else:
+            # Só limpa se foi seleção manual
+            if not st.session_state.get('auto_selected', False):
                 st.session_state.selected_printer = None
         
         # Modo de resposta
@@ -398,6 +408,7 @@ Posso ajudar com:
                                 # Impressora identificada - marca como selecionada automaticamente
                                 st.session_state.selected_printer = data
                                 st.session_state.auto_selected = True
+                                st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
                                 
                                 printer_name = PRINTER_METADATA.get(data, data)
                                 success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!\n\n💡 *Impressora {printer_name} selecionada automaticamente na barra lateral*"
@@ -446,6 +457,7 @@ Posso ajudar com:
                                             # Marca impressora como selecionada automaticamente
                                             st.session_state.selected_printer = model
                                             st.session_state.auto_selected = True
+                                            st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
                                             st.session_state.funnel_active = False
                                             st.session_state.funnel_stage = None
                                             st.session_state.funnel_answers = {}
@@ -524,6 +536,7 @@ Sou especializado em **impressoras Epson**. Posso ajudar com:
                 # Marca como selecionada automaticamente
                 st.session_state.selected_printer = detected
                 st.session_state.auto_selected = True
+                st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
                 with st.chat_message("assistant"):
                     st.info(f"🔍 Detectado: **{PRINTER_METADATA.get(detected, detected)}**\n\n💡 *Impressora selecionada automaticamente na barra lateral*")
             else:
