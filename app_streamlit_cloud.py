@@ -341,7 +341,8 @@ def main():
         
         # Info
         st.markdown("---")
-        st.caption("**Versão:** 2.0 Cloud")
+        st.caption("**Versão:** 2.0.5 Cloud (24/09 - Funnel Fix)")
+        st.caption("**Última Atualização:** 15:35")
         st.caption("**Modelos suportados:**")
         for model in list(PRINTER_METADATA.keys())[:5]:
             st.caption(f"• {model}")
