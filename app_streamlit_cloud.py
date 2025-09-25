@@ -341,8 +341,8 @@ def main():
         
         # Info
         st.markdown("---")
-        st.caption("**Versão:** 2.0.5 Cloud (24/09 - Funnel Fix)")
-        st.caption("**Última Atualização:** 15:35")
+        st.caption("**Versão:** 2.0.6 Cloud (24/09 - Multiple Options Fix)")
+        st.caption("**Última Atualização:** 15:42")
         st.caption("**Modelos suportados:**")
         for model in list(PRINTER_METADATA.keys())[:5]:
             st.caption(f"• {model}")
@@ -371,126 +371,140 @@ Posso ajudar com:
     
     # Sistema de afunilamento ativo
     if st.session_state.funnel_active:
-        question_data = get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers)
-        
-        if question_data:
-            # Mostra pergunta do afunilamento
+        # Caso especial: múltiplas opções encontradas
+        if st.session_state.funnel_stage == 99 and 'funnel_multiple_options' in st.session_state:
             with st.chat_message("assistant"):
-                if st.session_state.funnel_stage > 1:
-                    progress = f"📊 Pergunta {st.session_state.funnel_stage} de no máximo 5\n\n"
-                    st.markdown(progress)
-                
-                st.markdown(question_data['question'])
-                
-                # Botões de resposta
-                cols = st.columns(len(question_data['options']))
-                for i, option in enumerate(question_data['options']):
-                    with cols[i]:
-                        if st.button(option, key=f"funnel_btn_{st.session_state.funnel_stage}_{i}", use_container_width=True):
-                            # Processa resposta
-                            result, data = process_funnel_answer(option, question_data['key'])
-                            
-                            # Adiciona pergunta e resposta ao histórico
-                            if not any(msg['content'] == question_data['question'] for msg in st.session_state.messages[-2:] if msg['role'] == 'assistant'):
+                st.markdown("🔍 **Encontrei algumas opções. Qual é a sua impressora?**")
+                for model in st.session_state.funnel_multiple_options:
+                    model_name = PRINTER_METADATA.get(model, model)
+                    if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
+                        # Marca impressora como selecionada automaticamente
+                        st.session_state.selected_printer = model
+                        st.session_state.auto_selected = True
+                        st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
+                        st.session_state.funnel_active = False
+                        st.session_state.funnel_stage = None
+                        st.session_state.funnel_answers = {}
+                        st.session_state.funnel_multiple_options = []
+                        
+                        # Adiciona mensagem informando a seleção
+                        st.session_state.messages.append({
+                            "role": "assistant",
+                            "content": f"✅ **{model_name} selecionada!**\n\n💡 *Impressora configurada na barra lateral*"
+                        })
+                        
+                        # Processa pergunta pendente
+                        if st.session_state.pending_question:
+                            with st.spinner('🤖 Processando...'):
+                                response, source = process_query_simple(
+                                    st.session_state.pending_question,
+                                    model,
+                                    st.session_state.response_mode
+                                )
+                                if response:
+                                    mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                                    header = f"{mode_emoji} **[{model_name}]**\n\n"
+                                    st.session_state.messages.append({
+                                        "role": "assistant",
+                                        "content": header + response,
+                                        "source": source
+                                    })
+                        st.session_state.pending_question = None
+                        st.rerun()
+        
+        else:
+            question_data = get_funnel_question(st.session_state.funnel_stage, st.session_state.funnel_answers)
+            
+            if question_data:
+                # Mostra pergunta do afunilamento
+                with st.chat_message("assistant"):
+                    if st.session_state.funnel_stage > 1:
+                        progress = f"📊 Pergunta {st.session_state.funnel_stage} de no máximo 5\n\n"
+                        st.markdown(progress)
+                    
+                    st.markdown(question_data['question'])
+                    
+                    # Botões de resposta
+                    cols = st.columns(len(question_data['options']))
+                    for i, option in enumerate(question_data['options']):
+                        with cols[i]:
+                            if st.button(option, key=f"funnel_btn_{st.session_state.funnel_stage}_{i}", use_container_width=True):
+                                # Processa resposta
+                                result, data = process_funnel_answer(option, question_data['key'])
+                                
+                                # Adiciona pergunta e resposta ao histórico
+                                if not any(msg['content'] == question_data['question'] for msg in st.session_state.messages[-2:] if msg['role'] == 'assistant'):
+                                    st.session_state.messages.append({
+                                        "role": "assistant",
+                                        "content": question_data['question']
+                                    })
+                                
                                 st.session_state.messages.append({
-                                    "role": "assistant",
-                                    "content": question_data['question']
-                                })
-                            
-                            st.session_state.messages.append({
-                                "role": "user", 
-                                "content": option
-                            })
-                            
-                            if result is True:
-                                # Impressora identificada - marca como selecionada automaticamente
-                                st.session_state.selected_printer = data
-                                st.session_state.auto_selected = True
-                                st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
-                                
-                                printer_name = PRINTER_METADATA.get(data, data)
-                                success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!\n\n💡 *Impressora {printer_name} selecionada automaticamente na barra lateral*"
-                                st.session_state.messages.append({
-                                    "role": "assistant",
-                                    "content": success_msg
+                                    "role": "user", 
+                                    "content": option
                                 })
                                 
-                                # Se há pergunta pendente, processa
-                                if st.session_state.pending_question:
-                                    with st.spinner('🤖 Processando...'):
-                                        response, source = process_query_simple(
-                                            st.session_state.pending_question,
-                                            data,
-                                            st.session_state.response_mode
-                                        )
-                                        
-                                        if response:
-                                            mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
-                                            header = f"{mode_emoji} **[{printer_name}]**\n\n"
-                                            st.session_state.messages.append({
-                                                "role": "assistant",
-                                                "content": header + response,
-                                                "source": source
-                                            })
+                                if result is True:
+                                    # Impressora identificada - marca como selecionada automaticamente
+                                    st.session_state.selected_printer = data
+                                    st.session_state.auto_selected = True
+                                    st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
+                                    
+                                    printer_name = PRINTER_METADATA.get(data, data)
+                                    success_msg = f"✅ **Impressora identificada: {printer_name}**\n\nAgora posso responder sua pergunta!\n\n💡 *Impressora {printer_name} selecionada automaticamente na barra lateral*"
+                                    st.session_state.messages.append({
+                                        "role": "assistant",
+                                        "content": success_msg
+                                    })
+                                    
+                                    # Se há pergunta pendente, processa
+                                    if st.session_state.pending_question:
+                                        with st.spinner('🤖 Processando...'):
+                                            response, source = process_query_simple(
+                                                st.session_state.pending_question,
+                                                data,
+                                                st.session_state.response_mode
+                                            )
+                                            
+                                            if response:
+                                                mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
+                                                header = f"{mode_emoji} **[{printer_name}]**\n\n"
+                                                st.session_state.messages.append({
+                                                    "role": "assistant",
+                                                    "content": header + response,
+                                                    "source": source
+                                                })
+                                    
+                                    # Limpa estado do afunilamento
+                                    st.session_state.funnel_active = False
+                                    st.session_state.funnel_stage = None
+                                    st.session_state.funnel_answers = {}
+                                    st.session_state.pending_question = None
+                                    # Força atualização completa
+                                    st.rerun()
                                 
-                                # Limpa estado do afunilamento
-                                st.session_state.funnel_active = False
-                                st.session_state.funnel_stage = None
-                                st.session_state.funnel_answers = {}
-                                st.session_state.pending_question = None
-                                # Força atualização completa
-                                st.rerun()
-                            
-                            elif result is False:
-                                st.error("❌ Não foi possível identificar uma impressora com essas características.")
-                                # Limpa o afunilamento quando não encontra impressora
-                                st.session_state.funnel_active = False
-                                st.session_state.funnel_stage = None
-                                st.session_state.funnel_answers = {}
-                                st.session_state.pending_question = None
-                                st.rerun()
-                            
-                            elif result is None and data:
-                                # Múltiplas opções - mostra escolha
-                                with st.chat_message("assistant"):
-                                    st.markdown("🔍 **Encontrei algumas opções. Qual é a sua impressora?**")
-                                    for model in data:
-                                        model_name = PRINTER_METADATA.get(model, model)
-                                        if st.button(f"➡️ {model_name}", key=f"select_{model}", use_container_width=True):
-                                            # Marca impressora como selecionada automaticamente
-                                            st.session_state.selected_printer = model
-                                            st.session_state.auto_selected = True
-                                            st.session_state.selection_counter = st.session_state.get('selection_counter', 0) + 1
-                                            st.session_state.funnel_active = False
-                                            st.session_state.funnel_stage = None
-                                            st.session_state.funnel_answers = {}
-                                            
-                                            # Adiciona mensagem informando a seleção
-                                            st.session_state.messages.append({
-                                                "role": "assistant",
-                                                "content": f"✅ **{model_name} selecionada!**\n\n💡 *Impressora configurada na barra lateral*"
-                                            })
-                                            
-                                            # Processa pergunta pendente
-                                            if st.session_state.pending_question:
-                                                with st.spinner('🤖 Processando...'):
-                                                    response, source = process_query_simple(
-                                                        st.session_state.pending_question,
-                                                        model,
-                                                        st.session_state.response_mode
-                                                    )
-                                                    if response:
-                                                        mode_emoji = "⚡" if st.session_state.response_mode == 'rapido' else "📖"
-                                                        header = f"{mode_emoji} **[{model_name}]**\n\n"
-                                                        st.session_state.messages.append({
-                                                            "role": "assistant",
-                                                            "content": header + response,
-                                                            "source": source
-                                                        })
-                                            st.session_state.pending_question = None
-                                            st.rerun()
-                            else:
-                                st.rerun()
+                                elif result is False:
+                                    st.error("❌ Não foi possível identificar uma impressora com essas características.")
+                                    # Limpa o afunilamento quando não encontra impressora
+                                    st.session_state.funnel_active = False
+                                    st.session_state.funnel_stage = None
+                                    st.session_state.funnel_answers = {}
+                                    st.session_state.pending_question = None
+                                    st.rerun()
+                                
+                                elif result is None and data:
+                                    # Múltiplas opções - salva no session_state para mostrar depois
+                                    st.session_state.funnel_multiple_options = data
+                                    st.session_state.funnel_stage = 99  # Marca como estágio especial
+                                    
+                                    # Adiciona mensagem informando que encontrou múltiplas opções
+                                    st.session_state.messages.append({
+                                        "role": "assistant",
+                                        "content": f"🔍 **Encontrei {len(data)} impressoras** com essas características. Por favor, escolha a sua:"
+                                    })
+                                    st.rerun()
+                                else:
+                                    st.rerun()
         
         # Botão para cancelar afunilamento
         if st.session_state.funnel_active:
