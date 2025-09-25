@@ -25,7 +25,18 @@ except:
     GEMINI_API_KEY = "AIzaSyDjejxDFqTSg_i-KDnS2QqsXdiWLydIrSk"
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+
+# Tenta usar diferentes modelos em ordem de preferência
+try:
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+except:
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')  
+    except:
+        try:
+            model = genai.GenerativeModel('gemini-pro')
+        except:
+            model = genai.GenerativeModel('gemini-1.0-pro')
 
 # Rate limiting
 last_request_time = 0
@@ -76,13 +87,32 @@ Pergunta: "{query}"
 
 É sobre impressoras, problemas de impressão, tinta, papel, configuração de impressoras, scanner ou cópia?"""
         
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.1,
-                max_output_tokens=10
+        # Tenta com modelo principal
+        try:
+            response = model.generate_content(
+                prompt,
+                generation_config=genai.types.GenerationConfig(
+                    temperature=0.1,
+                    max_output_tokens=10
+                )
             )
-        )
+        except Exception as model_error:
+            # Se falhar, tenta com modelo alternativo
+            if "404" in str(model_error) or "not found" in str(model_error).lower():
+                try:
+                    fallback_model = genai.GenerativeModel('gemini-pro')
+                    response = fallback_model.generate_content(
+                        prompt,
+                        generation_config=genai.types.GenerationConfig(
+                            temperature=0.1,
+                            max_output_tokens=10
+                        )
+                    )
+                except:
+                    # Se falhar completamente, assume que é sobre impressoras
+                    return True
+            else:
+                return True
         
         if response and response.text:
             return "SIM" in response.text.upper()
@@ -262,13 +292,32 @@ Pergunta: {query}
 Resposta detalhada:"""
             max_tokens = 800
         
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.7,
-                max_output_tokens=max_tokens
+        # Tenta gerar resposta com modelo principal
+        try:
+            response = model.generate_content(
+                prompt,
+                generation_config=genai.types.GenerationConfig(
+                    temperature=0.7,
+                    max_output_tokens=max_tokens
+                )
             )
-        )
+        except Exception as model_error:
+            # Se falhar, tenta com modelo alternativo
+            if "404" in str(model_error) or "not found" in str(model_error).lower():
+                try:
+                    # Fallback para gemini-pro
+                    fallback_model = genai.GenerativeModel('gemini-pro')
+                    response = fallback_model.generate_content(
+                        prompt,
+                        generation_config=genai.types.GenerationConfig(
+                            temperature=0.7,
+                            max_output_tokens=max_tokens
+                        )
+                    )
+                except:
+                    return None, f"Erro ao acessar modelos Gemini: {model_error}"
+            else:
+                return None, f"Erro: {model_error}"
         
         last_request_time = time.time()
         
@@ -341,8 +390,8 @@ def main():
         
         # Info
         st.markdown("---")
-        st.caption("**Versão:** 2.0.6 Cloud (24/09 - Multiple Options Fix)")
-        st.caption("**Última Atualização:** 15:42")
+        st.caption("**Versão:** 2.0.7 Cloud (25/09 - Model Fix)")
+        st.caption("**Última Atualização:** 15:55")
         st.caption("**Modelos suportados:**")
         for model in list(PRINTER_METADATA.keys())[:5]:
             st.caption(f"• {model}")
