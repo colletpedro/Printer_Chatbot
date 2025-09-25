@@ -26,12 +26,12 @@ except:
 
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Usa modelo mais recente disponível (com prefixo models/)
+# Usa modelo estável que está funcionando (com prefixo models/)
 try:
-    model = genai.GenerativeModel('models/gemini-2.5-flash')  # Mais recente!
+    model = genai.GenerativeModel('models/gemini-2.0-flash')  # Mais estável
 except:
     try:
-        model = genai.GenerativeModel('models/gemini-2.0-flash')  # Alternativa
+        model = genai.GenerativeModel('models/gemini-2.5-flash')  # Alternativa mais nova
     except:
         try:
             model = genai.GenerativeModel('models/gemini-1.5-flash-8b')  # Versão leve
@@ -114,9 +114,15 @@ Pergunta: "{query}"
             else:
                 return True
         
-        if response and response.text:
-            return "SIM" in response.text.upper()
-        return True
+        # Verifica se há resposta válida
+        if response and response.parts:
+            try:
+                text = response.text
+                if text:
+                    return "SIM" in text.upper()
+            except:
+                pass
+        return True  # Em caso de dúvida, assume que é sobre impressoras
         
     except Exception as e:
         print(f"Erro ao verificar contexto: {e}")
@@ -321,10 +327,31 @@ Resposta detalhada:"""
         
         last_request_time = time.time()
         
-        if response and response.text:
-            return response.text, "📚 Conhecimento base Gemini"
-        else:
-            return None, "Erro ao gerar resposta"
+        # Verifica se há resposta válida
+        if response:
+            try:
+                # Primeiro tenta obter o texto diretamente
+                if hasattr(response, 'text'):
+                    text = response.text
+                    if text:
+                        return text, "📚 Conhecimento base Gemini"
+                
+                # Se não tiver text, tenta acessar via candidates
+                if hasattr(response, 'candidates') and response.candidates:
+                    candidate = response.candidates[0]
+                    if candidate.content and candidate.content.parts:
+                        text = candidate.content.parts[0].text
+                        if text:
+                            return text, "📚 Conhecimento base Gemini"
+                    
+                    # Verifica se foi bloqueado
+                    if hasattr(candidate, 'finish_reason') and candidate.finish_reason == 2:
+                        return "Desculpe, não posso responder a essa pergunta. Por favor, reformule sobre impressoras.", "⚠️ Resposta filtrada"
+                        
+            except Exception as e:
+                print(f"Erro ao processar resposta: {e}")
+        
+        return None, "Erro ao gerar resposta"
             
     except Exception as e:
         return None, f"Erro: {e}"
@@ -390,8 +417,8 @@ def main():
         
         # Info
         st.markdown("---")
-        st.caption("**Versão:** 2.0.8 Cloud (25/09 - Gemini 2.5)")
-        st.caption("**Última Atualização:** 16:10")
+        st.caption("**Versão:** 2.1.0 Cloud (25/09 - Response Fix)")
+        st.caption("**Última Atualização:** 16:25")
         st.caption("**Modelos suportados:**")
         for model in list(PRINTER_METADATA.keys())[:5]:
             st.caption(f"• {model}")
