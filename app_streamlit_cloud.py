@@ -26,17 +26,17 @@ except:
 
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Tenta usar diferentes modelos em ordem de preferência
+# Usa modelo mais recente disponível (com prefixo models/)
 try:
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('models/gemini-2.5-flash')  # Mais recente!
 except:
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')  
+        model = genai.GenerativeModel('models/gemini-2.0-flash')  # Alternativa
     except:
         try:
-            model = genai.GenerativeModel('gemini-pro')
+            model = genai.GenerativeModel('models/gemini-1.5-flash-8b')  # Versão leve
         except:
-            model = genai.GenerativeModel('gemini-1.0-pro')
+            model = genai.GenerativeModel('gemini-pro')  # Fallback final
 
 # Rate limiting
 last_request_time = 0
@@ -100,7 +100,7 @@ Pergunta: "{query}"
             # Se falhar, tenta com modelo alternativo
             if "404" in str(model_error) or "not found" in str(model_error).lower():
                 try:
-                    fallback_model = genai.GenerativeModel('gemini-pro')
+                    fallback_model = genai.GenerativeModel('models/gemini-2.0-flash')
                     response = fallback_model.generate_content(
                         prompt,
                         generation_config=genai.types.GenerationConfig(
@@ -305,8 +305,8 @@ Resposta detalhada:"""
             # Se falhar, tenta com modelo alternativo
             if "404" in str(model_error) or "not found" in str(model_error).lower():
                 try:
-                    # Fallback para gemini-pro
-                    fallback_model = genai.GenerativeModel('gemini-pro')
+                    # Fallback para modelo funcionando
+                    fallback_model = genai.GenerativeModel('models/gemini-2.0-flash')
                     response = fallback_model.generate_content(
                         prompt,
                         generation_config=genai.types.GenerationConfig(
@@ -390,8 +390,8 @@ def main():
         
         # Info
         st.markdown("---")
-        st.caption("**Versão:** 2.0.7 Cloud (25/09 - Model Fix)")
-        st.caption("**Última Atualização:** 15:55")
+        st.caption("**Versão:** 2.0.8 Cloud (25/09 - Gemini 2.5)")
+        st.caption("**Última Atualização:** 16:10")
         st.caption("**Modelos suportados:**")
         for model in list(PRINTER_METADATA.keys())[:5]:
             st.caption(f"• {model}")
